@@ -4,11 +4,25 @@ using Unity.Services.RemoteConfig;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+using System.Collections;
 
 public class RemoteConfig : MonoBehaviour
 {
+    public static RemoteConfig Instance { get; private set; }
     public struct userAttributes { }
     public struct appAttributes { }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     async Task InitializeRemoteConfigAsync()
     {
@@ -32,7 +46,16 @@ public class RemoteConfig : MonoBehaviour
         }
 
         RemoteConfigService.Instance.FetchCompleted += ApplyRemoteSettings;
-        RemoteConfigService.Instance.FetchConfigs(new userAttributes(), new appAttributes());
+        StartCoroutine(UpdateRemoteData());
+    }
+
+    IEnumerator UpdateRemoteData()
+    {
+        while (true)
+        {
+            RemoteConfigService.Instance.FetchConfigs(new userAttributes(), new appAttributes());
+            yield return new WaitForSeconds(30);
+        }
     }
 
     void ApplyRemoteSettings(ConfigResponse configResponse)
