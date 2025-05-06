@@ -53,8 +53,7 @@ public class HuntingState : IState
     }
 
     private void FindTarget(Player target)
-{
-        Debug.Log("On Update FindTarget");
+    {
 
         if (target == null) return;
         float dist = Vector3.Distance(target.transform.position, _transform.position);
@@ -71,21 +70,17 @@ public class HuntingState : IState
 
     public void PersuitTarget(Player target)
     {
-        Debug.Log("On Update PersuitTarget");
-
         Vector3 steering = _pursuitFunc(target);
         _addForceFunc?.Invoke(steering);
     }
 
     public void AttackTarget(Player target)
     {
-        Debug.Log("On Update AttackTarget");
         _attackFunc?.Invoke(target);
     }
 
     public void OnUpdate()
     {
-        Debug.Log("On Update HuntingState");
         float currentEnergy = _getEnergy();
         currentEnergy -= Time.deltaTime;
         _setEnergy(currentEnergy);

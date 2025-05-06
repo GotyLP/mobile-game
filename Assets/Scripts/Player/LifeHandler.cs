@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeHandler : MonoBehaviour
+public class LifeHandler : MonoBehaviour, IEntity
 {
     [SerializeField] float initialLife = 100;
     [SerializeField] float _currentLife;
@@ -16,12 +16,12 @@ public class LifeHandler : MonoBehaviour
     public void GetDamage(float dmg)
     {
         _currentLife -= dmg;
+        Debug.Log("Me daño");
         if (_currentLife <= 0) 
         {
             //onDead();
             Debug.Log("Dead");
         }
     }
-
 }
 

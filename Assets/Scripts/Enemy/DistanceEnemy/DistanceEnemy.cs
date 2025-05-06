@@ -9,7 +9,6 @@ public class DistanceEnemy : MonoBehaviour, IProduct
     [SerializeField] float _speedReg;
     [SerializeField] float _energy;
     [SerializeField] float _maxEnergy;
-    FSM<string> _fsm;
     [SerializeField] Vector3 _velocity;
     [SerializeField] float _maxVelocity;
     [SerializeField] float _radiusPersuit;
@@ -19,6 +18,7 @@ public class DistanceEnemy : MonoBehaviour, IProduct
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Transform _firePoint;
     [SerializeField] private float _shootCooldown = 1f;
+    FSM<string> _fsm;
     private float _lastShootTime = -Mathf.Infinity;
 
     [SerializeField] private Transform[] _waypoints;

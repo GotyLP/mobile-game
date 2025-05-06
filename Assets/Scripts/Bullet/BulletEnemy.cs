@@ -6,6 +6,7 @@ public class BulletEnemy : MonoBehaviour
 {
     [SerializeField] private float _lifeTime;
     [SerializeField] private float speed = 3f;
+    [SerializeField] private float dmg = 5f;
 
     private float _currentLifeTime;
     private Vector3 _direction;
@@ -40,5 +41,18 @@ public class BulletEnemy : MonoBehaviour
     public static void TurnOff(BulletEnemy bullet)
     {
         bullet.gameObject.SetActive(false);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Colisiono");
+
+        IEntity entity = other.GetComponent<IEntity>();
+        if (entity != null)
+        {
+            Debug.Log("Entro");
+            entity.GetDamage(dmg);
+            TurnOff(this);
+        }
     }
 }

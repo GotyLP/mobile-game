@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 63567909290626258}
   - component: {fileID: 6566104342835429615}
   - component: {fileID: 7317199883177771467}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.0774417, y: 1.53, z: 1.59}
-  m_LocalScale: {x: 0.17006, y: 0.18418044, z: 0.39262}
+  m_LocalScale: {x: 0.22116303, y: 0.23952667, z: 0.5106023}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -120,3 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lifeTime: 3
   speed: 3
+  dmg: 25
