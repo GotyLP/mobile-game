@@ -21,7 +21,7 @@ public class InputListener : MonoBehaviour
         _lifeHandler = GetComponent<LifeHandler>();
         //_movementHandler = GetComponent<MovementHandler>();
 
-        _lifeHandler.onDead += ObjectIsDead;
+        //_lifeHandler.onDead += ObjectIsDead;
 
 
         _movementDir = Vector3.zero;
@@ -35,7 +35,7 @@ public class InputListener : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.H))
         {
-            _minionSpawner.Spawn();
+            //_minionSpawner.Spawn();
         }
     }
     private void FixedUpdate()
@@ -46,6 +46,6 @@ public class InputListener : MonoBehaviour
     void ObjectIsDead()
     {
         this.enabled = false;
-        _lifeHandler.onDead -= ObjectIsDead;
+        //_lifeHandler.onDead -= ObjectIsDead;
     }
 }

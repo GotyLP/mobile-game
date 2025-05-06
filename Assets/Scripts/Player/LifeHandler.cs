@@ -7,7 +7,7 @@ public class LifeHandler : MonoBehaviour
     [SerializeField] float initialLife = 100;
     [SerializeField] float _currentLife;
 
-    public event Action onDead = delegate { };
+    //public event Action onDead = delegate { };
 
     private void Awake()
     {
@@ -18,7 +18,8 @@ public class LifeHandler : MonoBehaviour
         _currentLife -= dmg;
         if (_currentLife <= 0) 
         {
-            onDead();
+            //onDead();
+            Debug.Log("Dead");
         }
     }
 

@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BulletEnemy : MonoBehaviour
+{
+    [SerializeField] private float _lifeTime;
+    [SerializeField] private float speed = 3f;
+
+    private float _currentLifeTime;
+    private Vector3 _direction;
+
+    public void SetDirection(Vector3 dir)
+    {
+        _direction = dir.normalized;
+    }
+
+    private void OnEnable()
+    {
+        _currentLifeTime = _lifeTime;
+    }
+
+    private void Update()
+    {
+        transform.position += _direction * (speed * Time.deltaTime);
+
+        _currentLifeTime -= Time.deltaTime;
+
+        if (_currentLifeTime <= 0)
+        {
+            BulletEnemyFactory.Instance.ReturnToPool(this);
+        }
+    }
+
+    public static void TurnOn(BulletEnemy bullet)
+    {
+        bullet.gameObject.SetActive(true);
+    }
+
+    public static void TurnOff(BulletEnemy bullet)
+    {
+        bullet.gameObject.SetActive(false);
+    }
+}
