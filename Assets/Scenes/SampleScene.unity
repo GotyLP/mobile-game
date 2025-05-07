@@ -339,17 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e848803b390764f4f9ef391aacc7bced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats:
-    speedMov: 5
-    speedReg: 2
-    maxEnergy: 20
-    maxVelocity: 10
-    radiusPersuit: 20
-    radiusAttack: 10
-    maxForce: 5
-    prediction: 1
-    shootCooldown: 1
-    bulletPrefab: {fileID: 7018837027863624680, guid: 51c5eb10238249b489601655a1069d51, type: 3}
+  _stats: {fileID: 11400000, guid: f697bca8785d7014fa5a5cf7a8d1b43f, type: 2}
   _waypoints:
   - {fileID: 1266802967}
   - {fileID: 25635672}
@@ -388,8 +378,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.446529, y: 1.0983377, z: 0.24468926}
+  m_Center: {x: -0.03934458, y: 0.049167946, z: -0.018037185}
 --- !u!1 &331038455
 GameObject:
   m_ObjectHideFlags: 0

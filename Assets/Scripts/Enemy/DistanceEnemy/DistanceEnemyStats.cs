@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class DistanceEnemyStats
+[CreateAssetMenu(fileName = "DistanceEnemyStats", menuName = "Enemies/DistanceEnemyStats")]
+
+public class DistanceEnemyStats : ScriptableObject
 {
     public float speedMov = 5f;
     public float speedReg = 2f;
