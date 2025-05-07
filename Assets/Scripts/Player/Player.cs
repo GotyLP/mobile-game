@@ -6,6 +6,13 @@ public class Player : MonoBehaviour
 {
     [SerializeField] Controller controller;
     [SerializeField] float speed;
+    public Inventory Inventory { get; private set; }
+
+    private void Awake()
+    {
+        Inventory = new Inventory();
+    }
+
     private void Update()
     {
         if (controller == null) return;
@@ -19,6 +26,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Menu))
         {
             //Boton central del celular
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Inventory.UseWeapon(this);
         }
     }
 }
