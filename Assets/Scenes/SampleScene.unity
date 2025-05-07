@@ -206,7 +206,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100094, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
       propertyPath: m_Name
-      value: Sci-Fi_Soldier
+      value: EnemyDistance
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.33909896
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00049048295
+      objectReference: {fileID: 0}
+    - target: {fileID: 400066, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400066, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.181
+      objectReference: {fileID: 0}
+    - target: {fileID: 400066, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.014
       objectReference: {fileID: 0}
     - target: {fileID: 400094, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
       propertyPath: m_LocalScale.x
@@ -260,6 +284,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400096, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400096, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.33909896
+      objectReference: {fileID: 0}
+    - target: {fileID: 400096, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00049048295
+      objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -303,19 +339,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e848803b390764f4f9ef391aacc7bced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMov: 5
-  _speedReg: 10
-  _energy: 50
-  _maxEnergy: 50
-  _velocity: {x: 0, y: 0, z: 0}
-  _maxVelocity: 10
-  _radiusPersuit: 15
-  _radiusAttack: 10
-  _maxForce: 4
-  _prediction: 3
-  _bulletPrefab: {fileID: 7018837027863624680, guid: 51c5eb10238249b489601655a1069d51, type: 3}
-  _firePoint: {fileID: 706895545}
-  _shootCooldown: 1
+  _stats:
+    speedMov: 5
+    speedReg: 2
+    maxEnergy: 20
+    maxVelocity: 10
+    radiusPersuit: 20
+    radiusAttack: 10
+    maxForce: 5
+    prediction: 1
+    shootCooldown: 1
+    bulletPrefab: {fileID: 7018837027863624680, guid: 51c5eb10238249b489601655a1069d51, type: 3}
   _waypoints:
   - {fileID: 1266802967}
   - {fileID: 25635672}
@@ -684,7 +718,7 @@ Transform:
   m_GameObject: {fileID: 1147314581}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.17, z: 0}
   m_LocalScale: {x: 10.148308, y: 10.148308, z: 10.148308}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -822,7 +856,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 36
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!1001 &1765670428
 PrefabInstance:
@@ -975,7 +1009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4729365447508823583, guid: a754ab7eb059f284493c103602dbbddb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4729365447508823583, guid: a754ab7eb059f284493c103602dbbddb, type: 3}
       propertyPath: m_LocalPosition.z

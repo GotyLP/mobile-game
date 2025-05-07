@@ -16,6 +16,7 @@ public class HuntingState : IState
     private Action<Player> _attackFunc;
     private Func<float> _getEnergy;
     private Action<float> _setEnergy;
+    private Action<Vector3> _setVelocity;
 
     public HuntingState(
         FSM<string> fsm, 
@@ -26,7 +27,8 @@ public class HuntingState : IState
         Action<Vector3> addForce, 
         Action<Player> attackFunc,
         Func<float> getEnergy,
-        Action<float> setEnergy
+        Action<float> setEnergy,
+        Action<Vector3> setVelocity
         )
     {
         _fsm = fsm;
@@ -38,7 +40,7 @@ public class HuntingState : IState
         _attackFunc = attackFunc;
         _getEnergy = getEnergy;
         _setEnergy = setEnergy;
-
+        _setVelocity = setVelocity;
     }
     public void OnEnter()
     {
@@ -77,14 +79,16 @@ public class HuntingState : IState
     public void AttackTarget(Player target)
     {
         _attackFunc?.Invoke(target);
+        _setVelocity(Vector3.zero);
     }
 
     public void OnUpdate()
     {
+        Debug.Log("OnUpdate HuntingState - Energía antes: " + _getEnergy());
         float currentEnergy = _getEnergy();
         currentEnergy -= Time.deltaTime;
         _setEnergy(currentEnergy);
-
+        Debug.Log("OnUpdate HuntingState - Energía después: " + _getEnergy());
         if (currentEnergy <= 0)
             _fsm?.ChangeState(EnemyDistanceStatesNames.Idle);
 

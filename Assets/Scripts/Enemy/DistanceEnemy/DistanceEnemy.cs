@@ -4,25 +4,17 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class DistanceEnemy : MonoBehaviour, IProduct
-{    
-    [SerializeField] float _speedMov;
-    [SerializeField] float _speedReg;
-    [SerializeField] float _energy;
-    [SerializeField] float _maxEnergy;
-    [SerializeField] Vector3 _velocity;
-    [SerializeField] float _maxVelocity;
-    [SerializeField] float _radiusPersuit;
-    [SerializeField] float _radiusAttack;
-    [SerializeField] float _maxForce;
-    [SerializeField] float _prediction;
-    [SerializeField] GameObject _bulletPrefab;
-    [SerializeField] Transform _firePoint;
-    [SerializeField] private float _shootCooldown = 1f;
-    FSM<string> _fsm;
-    private float _lastShootTime = -Mathf.Infinity;
+{
+    [Header("Configuración de Stats")]
+    [SerializeField] private DistanceEnemyStats _stats;
 
+    [Header("Waypoints")]
     [SerializeField] private Transform[] _waypoints;
 
+    private float _energy;
+    private Vector3 _velocity;
+    private float _lastShootTime = -Mathf.Infinity;
+    private FSM<string> _fsm;
 
     public Vector3 Velocity => _velocity;
 
@@ -33,6 +25,7 @@ public class DistanceEnemy : MonoBehaviour, IProduct
 
     private void Awake()
     {
+        _energy = _stats.maxEnergy;
 
         _fsm = new FSM<string>();
 
@@ -40,31 +33,32 @@ public class DistanceEnemy : MonoBehaviour, IProduct
              _fsm,
              () => _energy,
              (value) => _energy = value,
-             _maxEnergy,
-             _speedReg
+             _stats.maxEnergy,
+             _stats.speedReg,
+             (v) => _velocity = v
          ));
         _fsm.AddState(EnemyDistanceStatesNames.Movement, new MovementState(
             _fsm,
             transform,
-            _radiusPersuit,
+            _stats.radiusPersuit,
             _waypoints,
             (targetPos) => Seek(targetPos),
             (force) => AddForce(force),
-             () => _energy,
+            () => _energy,
             (value) => _energy = value
         ));
         _fsm.AddState(EnemyDistanceStatesNames.Hunting, new HuntingState(
             _fsm,
             transform,
-            _radiusPersuit,
-            _radiusAttack,
+            _stats.radiusPersuit,
+            _stats.radiusAttack,
             (target) => Pursuit(target),
             (force) => AddForce(force),
             (target) => ShootAtTarget(target),
             () => _energy,
-            (value) => _energy = value
-            )
-        );
+            (value) => _energy = value,
+            (v) => _velocity = v
+        ));
 
         _fsm.ChangeState(EnemyDistanceStatesNames.Movement);
     }
@@ -80,7 +74,7 @@ public class DistanceEnemy : MonoBehaviour, IProduct
     public void AddForce(Vector3 force)
     {
         _velocity += force;
-        _velocity = Vector3.ClampMagnitude(_velocity, _maxVelocity);
+        _velocity = Vector3.ClampMagnitude(_velocity, _stats.maxVelocity);
 
         if (_velocity.sqrMagnitude > 0.01f)
         {
@@ -94,11 +88,10 @@ public class DistanceEnemy : MonoBehaviour, IProduct
     {
         var desired = target - transform.position;
         desired.Normalize();
-        desired *= _maxVelocity;
+        desired *= _stats.maxVelocity;
 
         var steering = desired - _velocity;
-        steering = Vector3.ClampMagnitude(steering, _maxForce);
-
+        steering = Vector3.ClampMagnitude(steering, _stats.maxForce);
 
         return steering;
     }
@@ -111,10 +104,9 @@ public class DistanceEnemy : MonoBehaviour, IProduct
         return Seek(futurePosition);
     }
 
-
     public void ShootAtTarget(Player target)
     {
-        if (Time.time - _lastShootTime < _shootCooldown)
+        if (Time.time - _lastShootTime < _stats.shootCooldown)
             return;
 
         _lastShootTime = Time.time;

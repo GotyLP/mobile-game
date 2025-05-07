@@ -8,19 +8,22 @@ public class IdleState : IState
     Action<float> _setEnergy;
     float _maxEnergy;
     float _regenSpeed;
+    Action<Vector3> _setVelocity;
 
-    public IdleState(FSM<string> fsm, Func<float> getEnergy, Action<float> setEnergy, float maxEnergy, float regenSpeed)
+    public IdleState(FSM<string> fsm, Func<float> getEnergy, Action<float> setEnergy, float maxEnergy, float regenSpeed, Action<Vector3> setVelocity)
     {
         _fsm = fsm;
         _getEnergy = getEnergy;
         _setEnergy = setEnergy;
         _maxEnergy = maxEnergy;
         _regenSpeed = regenSpeed;
+        _setVelocity = setVelocity;
     }
 
     public void OnEnter()
     {
         Debug.Log("OnEnter IdleState");
+        _setVelocity?.Invoke(Vector3.zero);
     }
 
     public void OnUpdate()
