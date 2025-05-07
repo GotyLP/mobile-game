@@ -14,11 +14,16 @@ public abstract class Enemy : MonoBehaviour, IEntity
 
     public void GetDamage(float damage)
     {
+        Debug.Log("AUCH");
         _life -= damage;
         if (_life < 0)
         {
-            gameObject.SetActive(false);
+            OnDead();
         }
+    }
+    public void OnDead()
+    {
+        gameObject.SetActive(false);        
     }
 
 }

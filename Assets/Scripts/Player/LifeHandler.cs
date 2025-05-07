@@ -16,13 +16,18 @@ public class LifeHandler : MonoBehaviour, IEntity
     public void GetDamage(float dmg)
     {
         _currentLife -= dmg;
-        Debug.Log("Me daño");
-        EventManager.Trigger(new PlayerHealthChangedEvent(_currentLife, initialLife));
+        Debug.Log("Me daño");        
+            EventManager.Trigger(new PlayerHealthChangedEvent(_currentLife, initialLife));
         if (_currentLife <= 0) 
         {
-            //onDead();
-            Debug.Log("Dead");
+            OnDead();            
         }
     }
+    public void OnDead()
+    {
+      Debug.Log("Dead");
+    }
+
+
 }
 

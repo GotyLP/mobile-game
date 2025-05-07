@@ -44,7 +44,7 @@ public class HuntingState : IState
     }
     public void OnEnter()
     {
-        Debug.Log("On Enter HuntingState");
+       // Debug.Log("On Enter HuntingState");
         _currentTarget = null;
     }
 
@@ -84,11 +84,11 @@ public class HuntingState : IState
 
     public void OnUpdate()
     {
-        Debug.Log("OnUpdate HuntingState - Energía antes: " + _getEnergy());
+       // Debug.Log("OnUpdate HuntingState - Energía antes: " + _getEnergy());
         float currentEnergy = _getEnergy();
         currentEnergy -= Time.deltaTime;
         _setEnergy(currentEnergy);
-        Debug.Log("OnUpdate HuntingState - Energía después: " + _getEnergy());
+       // Debug.Log("OnUpdate HuntingState - Energía después: " + _getEnergy());
         if (currentEnergy <= 0)
             _fsm?.ChangeState(EnemyDistanceStatesNames.Idle);
 

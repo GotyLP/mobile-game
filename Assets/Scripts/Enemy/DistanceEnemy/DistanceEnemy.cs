@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class DistanceEnemy : MonoBehaviour, IProduct
+public class DistanceEnemy : Enemy, IProduct
 {
     [Header("Configuración de Stats")]
     [SerializeField] private DistanceEnemyStats _stats;
@@ -20,7 +20,7 @@ public class DistanceEnemy : MonoBehaviour, IProduct
 
     public void Initialize()
     {
-        Debug.Log("Enemy Initialized");
+        //Debug.Log("Enemy Initialized");
     }
 
     private void Awake()
