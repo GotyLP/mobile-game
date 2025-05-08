@@ -3,32 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Joystick : Controller, IDragHandler, IEndDragHandler
+public class Joystick : MonoBehaviour, IDragHandler, IEndDragHandler, IPointerDownHandler
 {
-    Vector3 initialPos;
-    [SerializeField] float maxMagnitude = 75; 
-    void Start()
+    [SerializeField] private float maxMagnitude = 75f;
+    [SerializeField] private float deadZone = 0.1f;
+    
+    private Vector3 initialPos;
+    private Vector3 currentPos;
+    private bool isDragging;
+
+    private void Start()
     {
         initialPos = transform.position;
+        currentPos = initialPos;
     }
 
-    public override Vector3 GetMovementInput()
+    public Vector2 GetMovementInput()
     {
-        Vector3 modifiedDir = new Vector3(_modeDir.x, 0, _modeDir.y);
-        modifiedDir /= maxMagnitude;
-        return modifiedDir;
+        if (!isDragging) return Vector2.zero;
+
+        Vector2 direction = (currentPos - initialPos) / maxMagnitude;
+        
+        // Aplicar deadzone
+        if (direction.magnitude < deadZone)
+            return Vector2.zero;
+
+        return direction;
     }
-    
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        isDragging = true;
+        OnDrag(eventData);
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
-        _modeDir = Vector3.ClampMagnitude((Vector3)eventData.position - initialPos,maxMagnitude);
+        if (!isDragging) return;
 
-        transform.position = initialPos + _modeDir;
+        Vector3 dragPosition = eventData.position;
+        Vector3 moveDirection = Vector3.ClampMagnitude(dragPosition - initialPos, maxMagnitude);
+        currentPos = initialPos + moveDirection;
+        transform.position = currentPos;
     }
+
     public void OnEndDrag(PointerEventData eventData)
     {
+        isDragging = false;
         transform.position = initialPos;
-        _modeDir = Vector3.zero;
+        currentPos = initialPos;
     }
-   
 }
