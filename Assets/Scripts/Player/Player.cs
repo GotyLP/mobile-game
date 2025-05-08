@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Controller controller;
+    [SerializeField] MobileController controller;
     [SerializeField] float speed;
     public Inventory Inventory { get; private set; }
 

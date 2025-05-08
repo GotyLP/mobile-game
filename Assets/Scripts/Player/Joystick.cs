@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Joystick : Controller, IDragHandler, IEndDragHandler
+public class Joystick : MovementControler, IDragHandler, IEndDragHandler
 {
     Vector3 initialPos;
     [SerializeField] float maxMagnitude = 75; 
@@ -14,21 +14,21 @@ public class Joystick : Controller, IDragHandler, IEndDragHandler
 
     public override Vector3 GetMovementInput()
     {
-        Vector3 modifiedDir = new Vector3(_modeDir.x, 0, _modeDir.y);
+        Vector3 modifiedDir = new Vector3(modeDir.x, 0, modeDir.y);
         modifiedDir /= maxMagnitude;
         return modifiedDir;
     }
     
     public void OnDrag(PointerEventData eventData)
     {
-        _modeDir = Vector3.ClampMagnitude((Vector3)eventData.position - initialPos,maxMagnitude);
+        modeDir = Vector3.ClampMagnitude((Vector3)eventData.position - initialPos,maxMagnitude);
 
-        transform.position = initialPos + _modeDir;
+        transform.position = initialPos + modeDir;
     }
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.position = initialPos;
-        _modeDir = Vector3.zero;
+        modeDir = Vector3.zero;
     }
    
 }
