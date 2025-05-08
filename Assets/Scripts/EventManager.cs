@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum SimpleEventType
 {
-    PlayerHealthChangedEvent
+    PlayerHealthChangedEvent,
+    PlayerDeathEvent
 }
 
 public static class EventManager

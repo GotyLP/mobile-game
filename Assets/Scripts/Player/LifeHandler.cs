@@ -15,7 +15,7 @@ public class LifeHandler : MonoBehaviour, IEntity
     {
         _currentLife -= dmg;
         Debug.Log("Me daño");        
-            EventManager.Trigger(new PlayerHealthChangedEvent(_currentLife, initialLife));
+        EventManager.Trigger(new PlayerHealthChangedEvent(_currentLife, initialLife));
         if (_currentLife <= 0) 
         {
             OnDead();            
@@ -23,9 +23,9 @@ public class LifeHandler : MonoBehaviour, IEntity
     }
     public void OnDead()
     {
-      pauseMenu.ActivateObject();
-      Time.timeScale = 0;
-      Debug.Log("Dead");
+        EventManager.Trigger(SimpleEventType.PlayerDeathEvent);
+        Time.timeScale = 0;
+        Debug.Log("Dead");
     }
 }
 
