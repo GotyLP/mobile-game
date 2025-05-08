@@ -22,6 +22,11 @@ public class Inventory : MonoBehaviour
         _currentWeapon?.Attack(player);
     }
 
+    public void StopWeapon()
+    {
+        _currentWeapon?.StopAttack();
+    }
+
     public WeaponItem GetCurrentWeaponData()
     {
         return _currentWeaponData;

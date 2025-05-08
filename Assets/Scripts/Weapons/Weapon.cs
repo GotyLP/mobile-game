@@ -23,4 +23,9 @@ public class Weapon : MonoBehaviour, IWeapon
         _attackComponent.ActivateObject();
         Debug.Log("¡Ataque de " + _weaponData.weaponName + "! Daño: " + _weaponData.damage);
     }
+
+    public void StopAttack()
+    {
+        _attackComponent.DeactivateObject();
+    }
 }

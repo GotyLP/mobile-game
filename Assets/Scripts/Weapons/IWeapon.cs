@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IWeapon
 {
     void Attack(Player player);
+
+    void StopAttack();
 }
