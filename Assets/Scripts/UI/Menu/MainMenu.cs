@@ -4,59 +4,110 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Services.RemoteConfig;
 
 public class MainMenu : MonoBehaviour
 { 
-    [SerializeField] private GameObject prototypeButton;
-    [SerializeField] private TextMeshProUGUI menuTitleText;
-    
-    public GameObject Windows;
+    [Header("UI Elements")]
+    [SerializeField] private Button _prototypeButton;
+    [SerializeField] private TextMeshProUGUI _menuTitleText;
+    [SerializeField] private GameObject _windows;
 
     private void Start()
     {
+        Debug.Log("MainMenu Start - RemoteConfig Instance: " + (RemoteConfig.Instance != null));
+        
         if (RemoteConfig.Instance != null)
         {
-            // Configurar visibilidad del botón de prototipo
-            if (prototypeButton != null)
-            {
-                prototypeButton.SetActive(RemoteConfig.Instance.ShouldShowPrototype);
-            }
-
-            // Configurar texto del menú
-            if (menuTitleText != null)
-            {
-                menuTitleText.text = RemoteConfig.Instance.MenuText;
-            }
+            StartCoroutine(WaitForRemoteConfig());
+        }
+        else
+        {
+            Debug.LogError("RemoteConfig.Instance es null. Asegúrate de que el RemoteConfig esté en la escena y se haya inicializado correctamente.");
         }
     }
+
+    private IEnumerator WaitForRemoteConfig()
+    {
+        while (string.IsNullOrEmpty(RemoteConfig.Instance.MenuText))
+        {
+            Debug.Log("Esperando a que RemoteConfig esté listo...");
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        Debug.Log("Actualizando UI con valores de RemoteConfig");
+        
+        if (_prototypeButton != null)
+        {
+            _prototypeButton.gameObject.SetActive(RemoteConfig.Instance.ShouldShowPrototype);
+        }
+        else
+        {
+            Debug.LogWarning("Prototype Button no asignado en el Inspector");
+        }
+
+        if (_menuTitleText != null)
+        {
+            Debug.Log("Actualizando texto del menú a: " + RemoteConfig.Instance.MenuText);
+            _menuTitleText.text = RemoteConfig.Instance.MenuText;
+        }
+        else
+        {
+            Debug.LogWarning("Menu Title Text no asignado en el Inspector");
+        }
+      
+    }
+
+    public void OnPlayButtonClicked()
+    {
+        int currentLevel = RemoteConfig.Instance.ActualLevel;
+        string levelName = $"Level{currentLevel}";
+        Debug.Log($"Cargando nivel: {levelName}");
+        
+        // Desactivar el Canvas
+        Canvas menuCanvas = GetComponentInParent<Canvas>();
+        if (menuCanvas != null)
+        {
+            Debug.Log("Desactivando Canvas del menú");
+            menuCanvas.gameObject.SetActive(false);
+        }
+        
+        SceneManager.LoadScene(levelName);
+    }
     
-    public void ChangeSceneByName(string sceneName) // Cambiar escena por nombre
+    public void ChangeSceneByName(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
     
-    public void ChangeSceneByIndex(int sceneIndex) // Cambiar escena por Build Settings
+    public void ChangeSceneByIndex(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
     }
    
     public void ActivateObject() 
     {
-        if (Windows != null)
-            Windows.SetActive(true);
+        if (_windows != null)
+            _windows.SetActive(true);
     }
    
     public void DeactivateObject()
     {
-        if (Windows != null)
-            Windows.SetActive(false);
+        if (_windows != null)
+            _windows.SetActive(false);
     }
 
-    public void ToggleObject()// Alterna entre activo/inactivo
+    public void ToggleObject()
     {
-        if (Windows != null)
-            Windows.SetActive(!Windows.activeSelf);
+        if (_windows != null)
+            _windows.SetActive(!_windows.activeSelf);
     }
+
     public void QuitApplication() 
     {
         Debug.Log("Saliendo de la aplicación...");

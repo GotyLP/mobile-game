@@ -22,35 +22,45 @@ public class RemoteConfig : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("RemoteConfig Awake");
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        } else
+            Debug.Log("RemoteConfig Instance creada");
+        }
+        else
         {
+            Debug.Log("RemoteConfig Instance ya existe, destruyendo duplicado");
             Destroy(gameObject);
         }
     }
 
     async Task InitializeRemoteConfigAsync()
     {
-        // initialize handlers for unity game services
+        Debug.Log("Inicializando RemoteConfig...");
         await UnityServices.InitializeAsync();
+        Debug.Log("UnityServices inicializado");
 
-        // remote config requires authentication for managing environment information
         if (!AuthenticationService.Instance.IsSignedIn)
         {
+            Debug.Log("Iniciando sesión anónima...");
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            Debug.Log("Sesión anónima iniciada");
         }
     }
 
     async Task Start()
     {
-        // initialize Unity's authentication and core services, however check for internet connection
-        // in order to fail gracefully without throwing exception if connection does not exist
+        Debug.Log("RemoteConfig Start");
         if (Utilities.CheckForInternetConnection())
         {
+            Debug.Log("Conexión a internet detectada, inicializando RemoteConfig");
             await InitializeRemoteConfigAsync();
+        }
+        else
+        {
+            Debug.LogWarning("No hay conexión a internet, usando valores por defecto");
         }
 
         RemoteConfigService.Instance.FetchCompleted += ApplyRemoteSettings;
@@ -61,6 +71,7 @@ public class RemoteConfig : MonoBehaviour
     {
         while (true)
         {
+            Debug.Log("Actualizando datos de RemoteConfig...");
             RemoteConfigService.Instance.FetchConfigs(new userAttributes(), new appAttributes());
             yield return new WaitForSeconds(30);
         }
@@ -68,6 +79,8 @@ public class RemoteConfig : MonoBehaviour
 
     void ApplyRemoteSettings(ConfigResponse configResponse)
     {
+        Debug.Log("Aplicando configuración remota...");
+        
         // Obtener valores de Remote Config
         ShouldShowPrototype = RemoteConfigService.Instance.appConfig.GetBool("ShouldShowPrototype", false);
         MenuText = RemoteConfigService.Instance.appConfig.GetString("MenuText", "Main Menu");

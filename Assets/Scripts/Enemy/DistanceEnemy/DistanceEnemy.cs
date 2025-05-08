@@ -129,7 +129,6 @@ public class DistanceEnemy : Enemy, IProduct
 
         bullet.transform.position = transform.position;
         bullet.SetDirection(direction);
-        bullet.SetOwner(this);
     }
 }
 
