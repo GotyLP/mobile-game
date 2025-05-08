@@ -10,7 +10,11 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        Inventory = new Inventory();
+        Inventory = GetComponent<Inventory>();
+        if (Inventory == null)
+        {
+            Debug.LogError("No se encontró el componente Inventory en el Player. Asegúrate de que el componente Inventory esté adjunto al GameObject del Player.");
+        }
     }
 
     private void Update()

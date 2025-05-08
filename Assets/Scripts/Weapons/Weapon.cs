@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour, IWeapon
     private float _lastAttackTime = -Mathf.Infinity;
     private Attack _attackComponent;
 
-    public Weapon(WeaponItem weaponData, Attack attackComponent)
+    public void Initialize(WeaponItem weaponData, Attack attackComponent)
     {
         _weaponData = weaponData;
         _attackComponent = attackComponent;

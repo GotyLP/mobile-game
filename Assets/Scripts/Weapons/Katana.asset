@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Katana
   m_EditorClassIdentifier: 
   weaponName: Katana
-  damage: 45
+  damage: 20
   attackCooldown: 0.5
   energyCost: 10

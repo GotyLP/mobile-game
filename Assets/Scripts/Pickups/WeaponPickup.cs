@@ -8,6 +8,8 @@ public class WeaponPickup : PickupBase
 
     public override void OnPickup(Player player)
     {
-        player.Inventory.AddWeapon(new Weapon(weaponData, player.GetComponent<Attack>()));
+        Weapon weapon = player.gameObject.AddComponent<Weapon>();
+        weapon.Initialize(weaponData, player.GetComponent<Attack>());
+        player.Inventory.AddWeapon(weaponData, weapon);
     }
 }
