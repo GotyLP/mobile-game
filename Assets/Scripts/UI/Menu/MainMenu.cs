@@ -71,12 +71,12 @@ public class MainMenu : MonoBehaviour
         Debug.Log($"Cargando nivel: {levelName}");
         
         // Desactivar el Canvas
-        Canvas menuCanvas = GetComponentInParent<Canvas>();
-        if (menuCanvas != null)
-        {
-            Debug.Log("Desactivando Canvas del menú");
-            menuCanvas.gameObject.SetActive(false);
-        }
+        //Canvas menuCanvas = GetComponentInParent<Canvas>();
+        //if (menuCanvas != null)
+        //{
+        //    Debug.Log("Desactivando Canvas del menú");
+        //    menuCanvas.gameObject.SetActive(false);
+        //}
         
         SceneManager.LoadScene(levelName);
     }
