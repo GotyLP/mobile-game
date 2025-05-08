@@ -10,6 +10,21 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     // public GameObject pausePanel;
 
+    private void OnEnable()
+    {
+        EventManager.Subscribe(SimpleEventType.PlayerDeathEvent, OnPlayerDeath);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(SimpleEventType.PlayerDeathEvent, OnPlayerDeath);
+    }
+
+    private void OnPlayerDeath()
+    {
+        ActivateObject();
+    }
+
     private void Update()
     {
         OpenMenu();
