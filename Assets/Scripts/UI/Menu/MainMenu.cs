@@ -11,11 +11,11 @@ public class MainMenu : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private Button _prototypeButton;
     [SerializeField] private TextMeshProUGUI _menuTitleText;
-    [SerializeField] private GameObject _windows;
+    [SerializeField] private GameObject _windowsSettings;
+    [SerializeField] private GameObject _windowsMenu;
 
     private void Start()
     {
-
         Debug.Log("MainMenu Start - RemoteConfig Instance: " + (RemoteConfig.Instance != null));
         
         if (RemoteConfig.Instance != null)
@@ -93,20 +93,24 @@ public class MainMenu : MonoBehaviour
    
     public void ActivateObject() 
     {
-        if (_windows != null)
-            _windows.SetActive(true);
+        if (_windowsSettings != null)
+            _windowsSettings.SetActive(true);
     }
    
     public void DeactivateObject()
     {
-        if (_windows != null)
-            _windows.SetActive(false);
+        if (_windowsSettings != null)
+            _windowsSettings.SetActive(false);
     }
-
-    public void ToggleObject()
+    public void ToggleCanvasMenu()
     {
-        if (_windows != null)
-            _windows.SetActive(!_windows.activeSelf);
+        if (_windowsMenu != null)
+            _windowsMenu.SetActive(!_windowsMenu.activeSelf);
+    }
+    public void ToggleSettingsWinows()
+    {
+        if (_windowsSettings != null)
+            _windowsSettings.SetActive(!_windowsSettings.activeSelf);
     }
 
     public void QuitApplication() 
