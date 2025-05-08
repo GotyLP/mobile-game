@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+
         Debug.Log("MainMenu Start - RemoteConfig Instance: " + (RemoteConfig.Instance != null));
         
         if (RemoteConfig.Instance != null)

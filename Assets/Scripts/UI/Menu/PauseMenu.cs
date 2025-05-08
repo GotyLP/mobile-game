@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -22,18 +23,19 @@ public class PauseMenu : MonoBehaviour
     public void ActivateObject()
     {
         if (pauseMenu != null)
-            pauseMenu.SetActive(true);
+            pauseMenu.SetActive(true);        
     }
     public void ToggleObject()
     {
-        if (pauseMenu != null)
-            pauseMenu.SetActive(!pauseMenu.activeSelf);
+        bool isActive = !pauseMenu.activeSelf;
+        pauseMenu.SetActive(isActive);
+        Time.timeScale = isActive ? 0f : 1f;
     }
 
     public void DeactivateObject()
     {
         if (pauseMenu != null)
-            pauseMenu.SetActive(false);
+            pauseMenu.SetActive(false);        
     }
     public void OpenMenu()
     {

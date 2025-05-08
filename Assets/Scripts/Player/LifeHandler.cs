@@ -23,8 +23,7 @@ public class LifeHandler : MonoBehaviour, IEntity
     }
     public void OnDead()
     {
-    
-      pauseMenu.ToggleObject();
+      pauseMenu.ActivateObject();
       Time.timeScale = 0;
       Debug.Log("Dead");
     }
