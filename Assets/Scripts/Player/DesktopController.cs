@@ -48,15 +48,15 @@ public class DesktopController : MovementController
         // Control de ataque con mouse
         if (canAttack && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Attack();
+            //Attack();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            StopAttack();
+           // StopAttack();
         }
     }
 
-    private void Attack()
+    public void Attack()
     {
         if (player != null && player.Inventory != null)
         {
@@ -65,7 +65,7 @@ public class DesktopController : MovementController
         }
     }
 
-    private void StopAttack()
+    public void StopAttack()
     {
         if (player != null && player.Inventory != null)
         {
