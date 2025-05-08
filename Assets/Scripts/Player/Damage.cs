@@ -8,7 +8,6 @@ public class Damage : MonoBehaviour
 
     private void Awake()
     {
-        // Buscar el Inventory en el jugador
         _inventory = GetComponentInParent<Inventory>();
         if (_inventory == null)
         {
@@ -26,7 +25,6 @@ public class Damage : MonoBehaviour
             WeaponItem currentWeaponData = _inventory.GetCurrentWeaponData();
             if (currentWeaponData != null)
             {
-                Debug.Log("DAMAGE ENEMY with " + currentWeaponData.weaponName);
                 entity.GetDamage(currentWeaponData.damage);
             }
             else
