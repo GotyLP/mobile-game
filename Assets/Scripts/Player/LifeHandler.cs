@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class LifeHandler : MonoBehaviour, IEntity
 {
+    public PauseMenu pauseMenu;
     [SerializeField] float initialLife = 100;
     [SerializeField] float _currentLife;
-
-    //public event Action onDead = delegate { };
-
     private void Awake()
     {
         _currentLife = initialLife;
@@ -25,9 +23,10 @@ public class LifeHandler : MonoBehaviour, IEntity
     }
     public void OnDead()
     {
+    
+      pauseMenu.ToggleObject();
+      Time.timeScale = 0;
       Debug.Log("Dead");
     }
-
-
 }
 
