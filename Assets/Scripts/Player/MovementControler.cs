@@ -4,32 +4,36 @@ using UnityEngine;
 
 public abstract class MovementControler : MonoBehaviour 
 {
-   public Vector3 modeDir;
+    
+    public Vector3 moveDir;
     public virtual Vector3 GetMovementInput()
     {
-        return modeDir;
+        return moveDir;
     }
     public void MoveUp()
     {
-        modeDir = Vector3.forward;
+        moveDir = Vector3.forward;
     }
     public void MoveDown()
     {
-        modeDir = Vector3.back;
+        moveDir = Vector3.back;
     }
     public void MoveLeft()
     {
-        modeDir = Vector3.left;
+        moveDir = Vector3.left;
     }
     public void MoveRight()
     {
-        modeDir = Vector3.right;
+        moveDir = Vector3.right;
     }
     public void Static()
     {
-        modeDir = Vector3.zero;
+        moveDir = Vector3.zero;
     }
-
-
-
 }
+    
+   
+   
+   
+    
+

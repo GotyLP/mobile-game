@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] MobileController controller;
-    [SerializeField] float speed;
     public Inventory Inventory { get; private set; }
 
     private void Awake()
@@ -19,9 +17,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (controller == null) return;
-        transform.position += controller.GetMovementInput() * speed * Time.deltaTime;
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             //Boton de retorno del celular
