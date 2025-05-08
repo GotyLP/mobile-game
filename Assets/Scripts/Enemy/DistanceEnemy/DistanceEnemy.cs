@@ -15,6 +15,8 @@ public class DistanceEnemy : Enemy, IProduct
     private Vector3 _velocity;
     private float _lastShootTime = -Mathf.Infinity;
     private FSM<string> _fsm;
+    private float _currentMaxVelocity;
+    private float _currentShootCooldown;
 
     public Vector3 Velocity => _velocity;
 
@@ -25,7 +27,14 @@ public class DistanceEnemy : Enemy, IProduct
 
     private void Awake()
     {
-        _energy = _stats.maxEnergy;
+        // Aplicar multiplicadores de dificultad
+        float difficultyMultiplier = RemoteConfig.Instance != null ? RemoteConfig.Instance.GameDifficulty : 1f;
+        _currentMaxVelocity = _stats.maxVelocity * difficultyMultiplier;
+        _currentShootCooldown = _stats.shootCooldown / difficultyMultiplier; // Menor cooldown = más rápido dispara
+
+        // Usar la energía desde Remote Config si está disponible
+        float baseEnergy = RemoteConfig.Instance != null ? RemoteConfig.Instance.EnemyEnergy : _stats.maxEnergy;
+        _energy = baseEnergy;
 
         _fsm = new FSM<string>();
 
@@ -33,7 +42,7 @@ public class DistanceEnemy : Enemy, IProduct
              _fsm,
              () => _energy,
              (value) => _energy = value,
-             _stats.maxEnergy,
+             baseEnergy,
              _stats.speedReg,
              (v) => _velocity = v
          ));
@@ -74,7 +83,7 @@ public class DistanceEnemy : Enemy, IProduct
     public void AddForce(Vector3 force)
     {
         _velocity += force;
-        _velocity = Vector3.ClampMagnitude(_velocity, _stats.maxVelocity);
+        _velocity = Vector3.ClampMagnitude(_velocity, _currentMaxVelocity);
 
         if (_velocity.sqrMagnitude > 0.01f)
         {
@@ -88,7 +97,7 @@ public class DistanceEnemy : Enemy, IProduct
     {
         var desired = target - transform.position;
         desired.Normalize();
-        desired *= _stats.maxVelocity;
+        desired *= _currentMaxVelocity;
 
         var steering = desired - _velocity;
         steering = Vector3.ClampMagnitude(steering, _stats.maxForce);
@@ -106,7 +115,7 @@ public class DistanceEnemy : Enemy, IProduct
 
     public void ShootAtTarget(Player target)
     {
-        if (Time.time - _lastShootTime < _stats.shootCooldown)
+        if (Time.time - _lastShootTime < _currentShootCooldown)
             return;
 
         _lastShootTime = Time.time;
@@ -120,6 +129,7 @@ public class DistanceEnemy : Enemy, IProduct
 
         bullet.transform.position = transform.position;
         bullet.SetDirection(direction);
+        bullet.SetOwner(this);
     }
 }
 

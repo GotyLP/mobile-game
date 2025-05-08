@@ -1,4 +1,3 @@
-
 using System.Threading.Tasks;
 using Unity.Services.RemoteConfig;
 using Unity.Services.Authentication;
@@ -9,6 +8,15 @@ using System.Collections;
 public class RemoteConfig : MonoBehaviour
 {
     public static RemoteConfig Instance { get; private set; }
+
+    // Variables de Remote Config
+    public bool ShouldShowPrototype { get; private set; }
+    public string MenuText { get; private set; }
+    public int PlayerScore { get; private set; }
+    public float EnemyEnergy { get; private set; }
+    public int ActualLevel { get; private set; }
+    public float GameDifficulty { get; private set; }
+
     public struct userAttributes { }
     public struct appAttributes { }
 
@@ -60,7 +68,18 @@ public class RemoteConfig : MonoBehaviour
 
     void ApplyRemoteSettings(ConfigResponse configResponse)
     {
-        Debug.Log("RemoteConfigService.Instance.appConfig fetched: " + RemoteConfigService.Instance.appConfig.config.ToString());
+        // Obtener valores de Remote Config
+        ShouldShowPrototype = RemoteConfigService.Instance.appConfig.GetBool("ShouldShowPrototype", false);
+        MenuText = RemoteConfigService.Instance.appConfig.GetString("MenuText", "Main Menu");
+        PlayerScore = RemoteConfigService.Instance.appConfig.GetInt("PlayerScore", 0);
+        EnemyEnergy = RemoteConfigService.Instance.appConfig.GetFloat("EnemyEnergy", 100f);
+        ActualLevel = RemoteConfigService.Instance.appConfig.GetInt("ActualLevel", 1);
+        GameDifficulty = RemoteConfigService.Instance.appConfig.GetFloat("GameDifficulty", 1f);
+
+        Debug.Log($"Remote Config actualizado - Prototipo: {ShouldShowPrototype}, " +
+                 $"Título: {MenuText}, Score: {PlayerScore}, " +
+                 $"Energía Enemigo: {EnemyEnergy}, Nivel: {ActualLevel}, " +
+                 $"Dificultad: {GameDifficulty}x");
     }
 }
 

@@ -2,12 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 { 
+    [SerializeField] private GameObject prototypeButton;
+    [SerializeField] private TextMeshProUGUI menuTitleText;
     
     public GameObject Windows;
 
+    private void Start()
+    {
+        if (RemoteConfig.Instance != null)
+        {
+            // Configurar visibilidad del botón de prototipo
+            if (prototypeButton != null)
+            {
+                prototypeButton.SetActive(RemoteConfig.Instance.ShouldShowPrototype);
+            }
+
+            // Configurar texto del menú
+            if (menuTitleText != null)
+            {
+                menuTitleText.text = RemoteConfig.Instance.MenuText;
+            }
+        }
+    }
     
     public void ChangeSceneByName(string sceneName) // Cambiar escena por nombre
     {
@@ -38,7 +59,7 @@ public class MainMenu : MonoBehaviour
     }
     public void QuitApplication() 
     {
-        Debug.Log("Saliendo de la aplicaci�n...");
+        Debug.Log("Saliendo de la aplicación...");
         Application.Quit();
     }
 }

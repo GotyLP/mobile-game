@@ -6,9 +6,14 @@ public abstract class Enemy : MonoBehaviour, IEntity
 {
     private float _life;
     [SerializeField] private float _maxLife = 100f;
+    private float _baseDamage = 25f;
 
     private void Start()
     {
+        // Aplicar multiplicadores desde Remote Config
+        float difficultyMultiplier = RemoteConfig.Instance != null ? RemoteConfig.Instance.GameDifficulty : 1f;
+        _maxLife *= difficultyMultiplier;
+        _baseDamage *= difficultyMultiplier;
         _life = _maxLife;
     }
 
@@ -21,9 +26,14 @@ public abstract class Enemy : MonoBehaviour, IEntity
             OnDead();
         }
     }
+
     public void OnDead()
     {
         gameObject.SetActive(false);        
     }
 
+    protected float GetBaseDamage()
+    {
+        return _baseDamage;
+    }
 }
