@@ -48,11 +48,11 @@ public class DesktopController : MovementController
         // Control de ataque con mouse
         if (canAttack && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            //Attack();
+            Attack();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-           // StopAttack();
+            StopAttack();
         }
     }
 

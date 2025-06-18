@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button _prototypeButton;
     [SerializeField] private TextMeshProUGUI _menuTitleText;
     [SerializeField] private GameObject _windowsSettings;
+    [SerializeField] private GameObject _windowsShop;
     [SerializeField] private GameObject _windowsMenu;
 
     private void Start()
@@ -107,10 +108,15 @@ public class MainMenu : MonoBehaviour
         if (_windowsMenu != null)
             _windowsMenu.SetActive(!_windowsMenu.activeSelf);
     }
-    public void ToggleSettingsWinows()
+    public void ToggleSettingsWindows()
     {
         if (_windowsSettings != null)
             _windowsSettings.SetActive(!_windowsSettings.activeSelf);
+    }
+    public void ToggleShopWindows()
+    {
+        if (_windowsShop != null)
+            _windowsShop.SetActive(!_windowsShop.activeSelf);
     }
 
     public void QuitApplication() 

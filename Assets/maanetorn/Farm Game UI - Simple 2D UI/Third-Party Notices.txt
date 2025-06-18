@@ -1,0 +1,8 @@
+Third-Party Notices
+
+This asset package includes the following third-party components:
+
+   Font: "Lilita One"
+   License: SIL Open Font License 1.1
+   Source: https://fonts.google.com/specimen/Lilita+One/license
+   License Details: https://openfontlicense.org/open-font-license-official-text/

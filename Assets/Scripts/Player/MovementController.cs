@@ -21,7 +21,7 @@ public abstract class MovementController : MonoBehaviour
         {
             rb = gameObject.AddComponent<Rigidbody>();
         }
-        rb.freezeRotation = true;
+        //rb.freezeRotation = true;
     }
 
     public virtual Vector3 GetMovementInput()
@@ -31,22 +31,26 @@ public abstract class MovementController : MonoBehaviour
 
     public virtual void MoveUp()
     {
-        moveDirection = Vector3.forward;
+        //moveDirection = Vector3.forward;
+        rb.position += Vector3.forward * moveSpeed * Time.deltaTime;
     }
 
     public virtual void MoveDown()
     {
-        moveDirection = Vector3.back;
+       // moveDirection = Vector3.back;
+        rb.position += Vector3.back * moveSpeed * Time.deltaTime;
     }
 
     public virtual void MoveLeft()
     {
-        moveDirection = Vector3.left;
+        //moveDirection = Vector3.left;
+        rb.position += Vector3.left * moveSpeed * Time.deltaTime;
     }
 
     public virtual void MoveRight()
     {
-        moveDirection = Vector3.right;
+        //moveDirection = Vector3.right;
+        rb.position += Vector3.right * moveSpeed * Time.deltaTime;
     }
 
     public virtual void Stop()

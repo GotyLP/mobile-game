@@ -8,6 +8,7 @@ using UnityEngine.SocialPlatforms;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject warningMenu;
     // public GameObject pausePanel;
 
     private void OnEnable()
@@ -45,6 +46,13 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(isActive);
         Time.timeScale = isActive ? 0f : 1f;
     }
+    public void ToggleWarning()
+    {
+        bool isActive = !warningMenu.activeSelf;
+        warningMenu.SetActive(isActive);
+        Time.timeScale = isActive ? 0f : 1f;
+    }
+
 
     public void DeactivateObject()
     {
