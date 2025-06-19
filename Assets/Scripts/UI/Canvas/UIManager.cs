@@ -7,6 +7,15 @@ public class UIManager : MonoBehaviour
 {
     public Image HP_Slider;
 
+    void Start()
+    {
+        // Inicializar la barra de vida al 100%
+        if (HP_Slider != null)
+        {
+            HP_Slider.fillAmount = 1f;
+        }
+    }
+
     void OnEnable()
     {
         EventManager.Subscribe<PlayerHealthChangedEvent>(OnPlayerHealthChanged);
