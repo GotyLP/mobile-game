@@ -6,21 +6,46 @@ public class DesktopController : MovementController
     private bool canAttack = true;
     private float attackCooldown = 0.5f;
     private Player player;
-    private Vector3 currentInput;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         player = GetComponent<Player>();
     }
 
-    private void Update()
+    protected override void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        // Obtener input del teclado (WASD y flechas)
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            Debug.Log("W o UpArrow");
+            MoveUp();
+        }
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            Debug.Log("S o DownArrow");
+            MoveDown();
+        }
+        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            Debug.Log("A o LeftArrow");
+            MoveLeft();
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            Debug.Log("D o RightArrow");
+            MoveRight();
+        }
+        else
+        {
+            Debug.Log("Stop");
+            Stop();
+        }
 
-        currentInput = new Vector3(horizontal, 0, vertical).normalized;
+        // Aplicar el movimiento directamente
+        transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
 
+        // Control de ataque con mouse
         if (canAttack && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Attack();
@@ -29,11 +54,6 @@ public class DesktopController : MovementController
         {
             StopAttack();
         }
-    }
-
-    public override Vector3 GetMovementInput()
-    {
-        return currentInput;
     }
 
     public void Attack()
@@ -58,5 +78,35 @@ public class DesktopController : MovementController
         canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
+    }
+
+    public override Vector3 GetMovementInput()
+    {
+        return moveDirection;
+    }
+
+    public override void MoveUp()
+    {
+        moveDirection = Vector3.forward;
+    }
+
+    public override void MoveDown()
+    {
+        moveDirection = Vector3.back;
+    }
+
+    public override void MoveLeft()
+    {
+        moveDirection = Vector3.left;
+    }
+
+    public override void MoveRight()
+    {
+        moveDirection = Vector3.right;
+    }
+
+    public override void Stop()
+    {
+        moveDirection = Vector3.zero;
     }
 } 

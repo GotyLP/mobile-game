@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class MovementController : MonoBehaviour 
 {
-    [SerializeField] protected float moveSpeed = 5f;
+    protected Vector3 moveDirection;
+    [SerializeField] protected float moveSpeed = 5f;  // Valor por defecto pero no serializado
     protected Rigidbody rb;
 
     public float MoveSpeed
@@ -59,37 +60,13 @@ public abstract class MovementController : MonoBehaviour
 
     protected virtual void Update()
     {
+        // Calcular el movimiento
+        Vector3 movement = GetMovementInput() * moveSpeed;
+        
+        // Aplicar el movimiento al Rigidbody
         if (rb != null)
         {
-            Vector3 movement = GetMovementInput() * moveSpeed;
-            rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
+            rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
         }
     }
-
-    public abstract Vector3 GetMovementInput();
-
-    //public virtual void MoveUp()
-    //{
-    //    moveDirection = Vector3.forward;
-    //}
-
-    //public virtual void MoveDown()
-    //{
-    //    moveDirection = Vector3.back;
-    //}
-
-    //public virtual void MoveLeft()
-    //{
-    //    moveDirection = Vector3.left;
-    //}
-
-    //public virtual void MoveRight()
-    //{
-    //    moveDirection = Vector3.right;
-    //}
-
-    //public virtual void Stop()
-    //{
-    //    moveDirection = Vector3.zero;
-    //}
 }
