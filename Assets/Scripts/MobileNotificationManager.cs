@@ -6,7 +6,7 @@ using System;
 
 public class MobileNotificationManager : MonoBehaviour
 {
-    public static MobileNotificationManager Instance;
+    public static MobileNotificationManager Instance { get; private set; }
     AndroidNotificationChannel notifChanel;
     private void Awake()
     {
