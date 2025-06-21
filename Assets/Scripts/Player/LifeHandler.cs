@@ -2,30 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Bridge/Adapter between Unity's MonoBehaviour world and MVC Model
+/// Receives damage from scene interactions and delegates to PlayerModel
+/// </summary>
 public class LifeHandler : MonoBehaviour, IEntity
 {
-    public PauseMenu pauseMenu;
-    [SerializeField] float initialLife = 100;
-    [SerializeField] float _currentLife;
-    private void Awake()
+    private PlayerMVC.Player player;
+    private PlayerMVC.PlayerModel model;
+
+    void Awake()
     {
-        _currentLife = initialLife;
-    }
-    public void GetDamage(float dmg)
-    {
-        _currentLife -= dmg;
-        Debug.Log("Me daño");        
-        EventManager.Trigger(new PlayerHealthChangedEvent(_currentLife, initialLife));
-        if (_currentLife <= 0) 
+        player = GetComponent<PlayerMVC.Player>();
+        
+        if (player != null)
         {
-            OnDead();            
+            model = player.Model;
+        }
+        else
+        {
+            Debug.LogError("LifeHandler: Cannot find PlayerMVC.Player component");
         }
     }
+
+    void Start()
+    {
+        EventManager.Subscribe(SimpleEventType.PlayerDeathEvent, OnDead);
+    }
+
+    void OnDestroy()
+    {
+        EventManager.Unsubscribe(SimpleEventType.PlayerDeathEvent, OnDead);
+    }
+
+    /// <summary>
+    /// Called by external systems (bullets, enemies, etc.) via IEntity interface
+    /// </summary>
+    public void GetDamage(float dmg)
+    {
+        if (model != null)
+        {
+            Debug.Log($"LifeHandler: Received {dmg} damage, delegating to Model");
+            model.TakeDamage(dmg);
+        }
+    }
+
     public void OnDead()
     {
-        EventManager.Trigger(SimpleEventType.PlayerDeathEvent);
-        Time.timeScale = 0;
-        Debug.Log("Dead");
+        Time.timeScale = 0; // Pause the game
+        Debug.Log("Player Dead - Game Paused");        
     }
 }
+
 
