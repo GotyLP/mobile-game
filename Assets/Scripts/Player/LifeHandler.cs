@@ -8,12 +8,12 @@ using UnityEngine;
 /// </summary>
 public class LifeHandler : MonoBehaviour, IEntity
 {
-    private PlayerMVC.Player player;
-    private PlayerMVC.PlayerModel model;
+    private Player player;
+    private PlayerModel model;
 
     void Awake()
     {
-        player = GetComponent<PlayerMVC.Player>();
+        player = GetComponent<Player>();
         
         if (player != null)
         {
@@ -21,7 +21,7 @@ public class LifeHandler : MonoBehaviour, IEntity
         }
         else
         {
-            Debug.LogError("LifeHandler: Cannot find PlayerMVC.Player component");
+            Debug.LogError("LifeHandler: Cannot find Player component");
         }
     }
 

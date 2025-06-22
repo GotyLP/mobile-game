@@ -199,11 +199,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35049156}
   m_CullTransparentMesh: 1
---- !u!1 &161653901 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6691691867188828572, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-  m_PrefabInstance: {fileID: 779145409}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &163471919
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &318031630
 Transform:
   m_ObjectHideFlags: 0
@@ -1202,71 +1197,6 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!1001 &779145409
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5470484170811161962, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: joystick
-      value: 
-      objectReference: {fileID: 172654982158932832}
-    - target: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -8.41
-      objectReference: {fileID: 0}
-    - target: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -228.48
-      objectReference: {fileID: 0}
-    - target: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6691691867188828572, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6691691867188828572, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
 --- !u!1 &785213672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,33 +1331,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785213672}
   m_CullTransparentMesh: 1
---- !u!114 &790410634 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4921260609542035590, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-  m_PrefabInstance: {fileID: 779145409}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161653901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a6a468493e2d445881d67a46697e1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &790410637 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6550515624446982062, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-  m_PrefabInstance: {fileID: 779145409}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161653901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecc8b75b211d5a64285db69fb7386bc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &790410638 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5491161655034750129, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
-  m_PrefabInstance: {fileID: 779145409}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &830097906
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,7 +1972,7 @@ PrefabInstance:
     - target: {fileID: 3442304820826582309, guid: d7d8895cf1591b347b5823e833b8900d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 790410634}
+      objectReference: {fileID: 0}
     - target: {fileID: 7354799297413851912, guid: d7d8895cf1591b347b5823e833b8900d, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -3137,12 +3040,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mySave:
-    playerTransform: {fileID: 790410638}
+    playerTransform: {fileID: 0}
     playerName: player
     life: 100
     mana: 100
   _path: 
   _saveArchiveName: ProyectSaveData
+--- !u!1 &1307245823 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5177191474515125800, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
+  m_PrefabInstance: {fileID: 2009294564}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1452234324
 GameObject:
   m_ObjectHideFlags: 0
@@ -4759,7 +4667,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 161653901}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: 
           m_MethodName: 
           m_Mode: 1
@@ -4775,7 +4683,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 161653901}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: 
           m_MethodName: 
           m_Mode: 1
@@ -4851,12 +4759,16 @@ PrefabInstance:
     - {fileID: 4921260609542035590, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
     - {fileID: 6550515624446982062, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
     - {fileID: 5470484170811161962, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
+    - {fileID: 3624212964289545167, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6691691867188828572, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
       insertIndex: 4
       addedObject: {fileID: 2009294566}
+    - targetCorrespondingSourceObject: {fileID: 6691691867188828572, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2009294575}
   m_SourcePrefab: {fileID: 100100000, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
 --- !u!1 &2009294565 stripped
 GameObject:
@@ -4878,6 +4790,28 @@ MonoBehaviour:
   <StartLife>k__BackingField: 100
   <Speed>k__BackingField: 10
   <Joystick>k__BackingField: {fileID: 172654982158932832}
+  <DamageCollider>k__BackingField: {fileID: 1307245823}
+--- !u!95 &2009294575
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009294565}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2087943043
 GameObject:
   m_ObjectHideFlags: 0
@@ -5690,7 +5624,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 790410637}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: DesktopController, Assembly-CSharp
           m_MethodName: Attack
           m_Mode: 1
@@ -5706,7 +5640,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 790410637}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: DesktopController, Assembly-CSharp
           m_MethodName: StopAttack
           m_Mode: 1
@@ -5754,7 +5688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1393747293908305803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8268,7 +8202,6 @@ SceneRoots:
   - {fileID: 1294958653}
   - {fileID: 2127127493}
   - {fileID: 318031630}
-  - {fileID: 779145409}
   - {fileID: 2009294564}
   - {fileID: 1060341347}
   - {fileID: 1808636680}
