@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
 {
     [field: SerializeField] public PlayerModel Model { get; private set; }
@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public Animator Animator { get; private set; }
     public Inventory Inventory { get; private set; }
     public AttackSystem AttackSystem { get; private set; }
+    public CharacterController CharacterController { get; private set; }
 
     [field: SerializeField] public float StartLife { get; private set; }
     [field: SerializeField] public float Speed { get; private set; }
@@ -23,22 +24,18 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        // Obtener componentes requeridos
-        Rigidbody = GetComponent<Rigidbody>();
+        CharacterController = GetComponent<CharacterController>();      
+        Rigidbody = GetComponent<Rigidbody>();    
         Animator = GetComponent<Animator>();
         Inventory = GetComponent<Inventory>();
         
-        // Verificar DamageCollider antes de inicializar AttackSystem
-        Debug.Log($"Player: DamageCollider asignado: {DamageCollider?.name ?? "NULL"}");
         if (DamageCollider == null)
         {
             Debug.LogError("Player: ¡DamageCollider no está asignado en el Inspector! El sistema de ataque no funcionará correctamente.");
         }
         
-        // Inicializar sistema de ataque (no es componente)
         AttackSystem = new AttackSystem(DamageCollider, transform);
         
-        // Inicializar MVC
         Model = new PlayerModel(this);
         _view = new PlayerView(this);
         _controller = new PlayerController(this);
@@ -56,7 +53,7 @@ public class Player : MonoBehaviour
         _controller.FixUpdateInputs();
     }
 
-    // Métodos públicos para ser llamados desde UI
+    #region UIPublicMethods
     public void StartAttack()
     {
         Debug.Log("Player: StartAttack() llamado desde UI");
@@ -92,6 +89,7 @@ public class Player : MonoBehaviour
         // Para un ataque simple, desactivamos el modo UI después de un breve delay
         StartCoroutine(DisableUIAttackModeAfterDelay(0.1f));
     }
+    #endregion
 
     private IEnumerator DisableUIAttackModeAfterDelay(float delay)
     {

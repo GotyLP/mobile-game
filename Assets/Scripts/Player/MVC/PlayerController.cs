@@ -9,7 +9,7 @@ public class PlayerController : IController
     private IInputProvider _inputProvider;
     private Vector3 _direction;
     private bool _isAttacking;
-    private bool _uiAttackMode = false; // Flag para saber si estamos usando ataques de UI
+    private bool _uiAttackMode = false; // Flag to know is attack controller is from UI
 
     public PlayerController(Player user)
     {
@@ -68,9 +68,15 @@ public class PlayerController : IController
         {
             _direction = _inputProvider.GetMovementInput();
             
-            if (_inputProvider.IsInputActive())
+            float inputThreshold = 0.1f;
+            
+            if (_inputProvider.IsInputActive() && _direction.sqrMagnitude > inputThreshold * inputThreshold)
             {
                 _playerModel.Move(_direction);
+            }
+            else
+            {
+                _playerModel.Move(Vector3.zero);
             }
         }
     }

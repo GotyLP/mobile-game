@@ -13,6 +13,14 @@ public class PlayerModel
     private float _maxLife;
     private AttackSystem _attackSystem;
     private Inventory _inventory;
+    private CharacterController _characterController;
+    private Transform _transform;
+
+    // Movement and rotation variables
+    private Vector3 _velocity;
+    private float _gravity = -9.81f;
+    private float _rotationSpeed = 10f;
+    private Vector3 _lastMovementDirection;
 
     public event Action<float, float> OnMovement = delegate { };
 
@@ -27,6 +35,11 @@ public class PlayerModel
         _currentLife = _maxLife;
         _attackSystem = user.AttackSystem;
         _inventory = user.Inventory;
+        _characterController = user.CharacterController;
+        _transform = user.transform;
+        
+        // Initialize velocity
+        _velocity = Vector3.zero;
     }
 
     public void Move(Vector3 direction)
@@ -35,8 +48,43 @@ public class PlayerModel
         {
             direction.Normalize();
         }
-        _rb.MovePosition(_rb.position + direction * (_speed * Time.fixedDeltaTime));
+
+        Vector3 move = direction * _speed;
+        
+        if (direction.sqrMagnitude > 0.1f)
+        {
+            _lastMovementDirection = direction;
+            
+            Rotate(_lastMovementDirection);
+        }
+       
+        if (!_characterController.isGrounded)
+        {
+            _velocity.y += _gravity * Time.fixedDeltaTime;
+        }
+        else
+        {
+            if (_velocity.y < 0)
+            {
+                _velocity.y = -2f;
+            }
+        }
+
+     
+        Vector3 finalMovement = move + Vector3.up * _velocity.y;
+        
+        _characterController.Move(finalMovement * Time.fixedDeltaTime);
+        
         OnMovement(direction.x, direction.z);
+    }
+
+    private void Rotate(Vector3 direction)
+    {
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, _rotationSpeed * Time.fixedDeltaTime);
+        }
     }
 
     public void Attack()
@@ -77,6 +125,16 @@ public class PlayerModel
         _currentLife += amount;
         _currentLife = Mathf.Min(_maxLife, _currentLife); // Avoid exceeding max life
         EventManager.Trigger(new PlayerHealthChangedEvent(_currentLife, _maxLife));
+    }
+
+    public void SetGravity(float gravity)
+    {
+        _gravity = gravity;
+    }
+
+    public void SetRotationSpeed(float rotationSpeed)
+    {
+        _rotationSpeed = rotationSpeed;
     }
 }
 
