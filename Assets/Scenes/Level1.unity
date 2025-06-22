@@ -384,7 +384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &318031630
 Transform:
   m_ObjectHideFlags: 0
@@ -1972,7 +1972,7 @@ PrefabInstance:
     - target: {fileID: 3442304820826582309, guid: d7d8895cf1591b347b5823e833b8900d, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2009294566}
     - target: {fileID: 7354799297413851912, guid: d7d8895cf1591b347b5823e833b8900d, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -4650,51 +4650,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!114 &1957621393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927955061607678382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: 
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1001 &2009294564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4754,6 +4709,10 @@ PrefabInstance:
     - target: {fileID: 6691691867188828572, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
       propertyPath: m_Name
       value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6691691867188828572, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4921260609542035590, guid: d9a6659b62a420e41a63210100eea48b, type: 3}
@@ -5437,9 +5396,9 @@ GameObject:
   - component: {fileID: 180024698235808693}
   - component: {fileID: 2375835767238266805}
   - component: {fileID: 9220483883277102130}
+  - component: {fileID: 9220483883277102131}
   - component: {fileID: 1216641981107741990}
   - component: {fileID: 645485971638187050}
-  - component: {fileID: 1957621393}
   m_Layer: 5
   m_Name: Attack
   m_TagString: Untagged
@@ -5624,9 +5583,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: DesktopController, Assembly-CSharp
-          m_MethodName: Attack
+        - m_Target: {fileID: 9220483883277102131}
+          m_TargetAssemblyTypeName: AttackButton, Assembly-CSharp
+          m_MethodName: EventTriggerStartAttack
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5640,9 +5599,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: DesktopController, Assembly-CSharp
-          m_MethodName: StopAttack
+        - m_Target: {fileID: 9220483883277102131}
+          m_TargetAssemblyTypeName: AttackButton, Assembly-CSharp
+          m_MethodName: EventTriggerStopAttack
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5688,7 +5647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1393747293908305803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8193,6 +8152,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9220483883277102131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927955061607678382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4400d0a98d9f04895f90fb495789d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2009294566}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -28,6 +28,13 @@ public class Player : MonoBehaviour
         Animator = GetComponent<Animator>();
         Inventory = GetComponent<Inventory>();
         
+        // Verificar DamageCollider antes de inicializar AttackSystem
+        Debug.Log($"Player: DamageCollider asignado: {DamageCollider?.name ?? "NULL"}");
+        if (DamageCollider == null)
+        {
+            Debug.LogError("Player: ¡DamageCollider no está asignado en el Inspector! El sistema de ataque no funcionará correctamente.");
+        }
+        
         // Inicializar sistema de ataque (no es componente)
         AttackSystem = new AttackSystem(DamageCollider, transform);
         
@@ -52,9 +59,10 @@ public class Player : MonoBehaviour
     // Métodos públicos para ser llamados desde UI
     public void StartAttack()
     {
+        Debug.Log("Player: StartAttack() llamado desde UI");
+        _controller.EnableUIAttackMode(); // Activar modo UI
         Model.Attack();
         
-        // Si estamos usando MobileInputProvider, también actualizamos su estado
         if (_controller != null && Application.isMobilePlatform)
         {
             var mobileProvider = _controller.GetInputProvider() as MobileInputProvider;
@@ -64,9 +72,10 @@ public class Player : MonoBehaviour
 
     public void StopAttack()
     {
+        Debug.Log("Player: StopAttack() llamado desde UI");
         Model.StopAttack();
+        _controller.DisableUIAttackMode(); // Desactivar modo UI
         
-        // Si estamos usando MobileInputProvider, también actualizamos su estado
         if (_controller != null && Application.isMobilePlatform)
         {
             var mobileProvider = _controller.GetInputProvider() as MobileInputProvider;
@@ -74,10 +83,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Método de conveniencia para UI que maneja todo el ataque
     public void PerformAttack()
     {
+        Debug.Log("Player: PerformAttack() llamado desde UI");
+        _controller.EnableUIAttackMode(); // Activar modo UI temporalmente
         Model.Attack();
+        
+        // Para un ataque simple, desactivamos el modo UI después de un breve delay
+        StartCoroutine(DisableUIAttackModeAfterDelay(0.1f));
+    }
+
+    private IEnumerator DisableUIAttackModeAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        _controller.DisableUIAttackMode();
     }
 
     private void DisableComponent()

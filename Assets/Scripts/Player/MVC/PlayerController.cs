@@ -9,13 +9,13 @@ public class PlayerController : IController
     private IInputProvider _inputProvider;
     private Vector3 _direction;
     private bool _isAttacking;
+    private bool _uiAttackMode = false; // Flag para saber si estamos usando ataques de UI
 
     public PlayerController(Player user)
     {
         _playerModel = user.Model;
         _direction = Vector3.zero;
         
-        // Configurar el proveedor de input según la plataforma
         SetupInputProvider(user);
     }
 
@@ -38,10 +38,27 @@ public class PlayerController : IController
 
     public void UpdateInputs()
     {
-        // Manejar input de ataque
-        if (_inputProvider.IsAttacking())
+        if (!_uiAttackMode)
         {
+            HandleAutomaticAttackInput();
+        }
+    }
+
+    private void HandleAutomaticAttackInput()
+    {
+        bool currentlyAttacking = _inputProvider.IsAttacking();
+        
+        if (currentlyAttacking && !_isAttacking)
+        {
+            _isAttacking = true;
+            Debug.Log("PlayerController: Iniciando ataque automático");
             _playerModel.Attack();
+        }
+        else if (!currentlyAttacking && _isAttacking)
+        {
+            _isAttacking = false;
+            Debug.Log("PlayerController: Deteniendo ataque automático");
+            _playerModel.StopAttack();
         }
     }
 
@@ -57,43 +74,25 @@ public class PlayerController : IController
             }
         }
     }
-
-    private void HandleAttackInput()
+#region UI Attack Mode
+    public void EnableUIAttackMode()
     {
-        // Input de ataque para diferentes plataformas
-        bool attackInput = false;
-        
-        if (Application.isMobilePlatform)
-        {
-            // Para móvil, podrías usar un botón de ataque específico
-            // Por ahora, uso un toque en cualquier parte como ejemplo
-            attackInput = Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began;
-        }
-        else
-        {
-            // Para escritorio, usar clic izquierdo
-            attackInput = Input.GetMouseButtonDown(0);
-        }
-
-        if (attackInput && !_isAttacking)
-        {
-            _isAttacking = true;
-            _playerModel.Attack();
-        }
-        else if (!attackInput && _isAttacking)
-        {
-            _isAttacking = false;
-            _playerModel.StopAttack();
-        }
+        _uiAttackMode = true;
+        Debug.Log("PlayerController: Modo ataque UI activado");
     }
 
-    // Método para obtener el InputProvider actual (útil para UI)
+    public void DisableUIAttackMode()
+    {
+        _uiAttackMode = false;
+        Debug.Log("PlayerController: Modo ataque UI desactivado");
+    }
+#endregion
+
     public IInputProvider GetInputProvider()
     {
         return _inputProvider;
     }
 
-    // Método para cambiar el proveedor de input dinámicamente si es necesario
     public void SetInputProvider(IInputProvider newProvider)
     {
         _inputProvider = newProvider;
