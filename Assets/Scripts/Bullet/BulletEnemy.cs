@@ -45,12 +45,9 @@ public class BulletEnemy : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Colisiono");
-
         IEntity entity = other.GetComponent<IEntity>();
         if (entity != null)
-        {
-            Debug.Log("Entro");
+        {           
             entity.GetDamage(dmg);
             TurnOff(this);
         }

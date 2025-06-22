@@ -8,25 +8,21 @@ using UnityEngine;
 /// </summary>
 public class LifeHandler : MonoBehaviour, IEntity
 {
-    private Player player;
-    private PlayerModel model;
+    private Player _player;
+    private PlayerModel _model;
 
-    void Awake()
+
+    void Start()
     {
-        player = GetComponent<Player>();
-        
-        if (player != null)
+        _player = GetComponent<Player>();        
+        if (_player != null)
         {
-            model = player.Model;
+            _model = _player.Model;
         }
         else
         {
             Debug.LogError("LifeHandler: Cannot find Player component");
         }
-    }
-
-    void Start()
-    {
         EventManager.Subscribe(SimpleEventType.PlayerDeathEvent, OnDead);
     }
 
@@ -40,10 +36,10 @@ public class LifeHandler : MonoBehaviour, IEntity
     /// </summary>
     public void GetDamage(float dmg)
     {
-        if (model != null)
+        if (_model != null)
         {
             Debug.Log($"LifeHandler: Received {dmg} damage, delegating to Model");
-            model.TakeDamage(dmg);
+            _model.TakeDamage(dmg);
         }
     }
 
