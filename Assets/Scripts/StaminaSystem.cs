@@ -118,7 +118,7 @@ public class StaminaSystem : MonoBehaviour
     }
     void UpdateStamina()
     {
-        _staminaText.text = $"Stamina: {_currentStamina}/{_maxStamina}";
+        _staminaText.text = $"{_currentStamina}/{_maxStamina}";
     }
     void SaveGame()
     {
