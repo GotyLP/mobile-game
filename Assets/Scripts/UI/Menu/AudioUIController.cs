@@ -8,7 +8,7 @@ public class AudioUIController : MonoBehaviour
 
     void Start()
     {
-        // Cargar estado desde AudioManager
+      
         if (sliderVolumen != null)
         {
             sliderVolumen.value = AudioManager.instancia.volumenActual;

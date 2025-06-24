@@ -5,10 +5,12 @@ using UnityEngine;
 public class LifeHandler : MonoBehaviour, IEntity
 {
     public PauseMenu pauseMenu;
+    //public DataSceneController dataControler;
     [SerializeField] float initialLife = 100;
-    [SerializeField] float _currentLife;
+    public float _currentLife;
     private void Awake()
     {
+        //_currentLife = dataControler.RealLife;
         _currentLife = initialLife;
     }
     public void GetDamage(float dmg)

@@ -69,6 +69,11 @@ public class MainMenu : MonoBehaviour
             windowsIndex = _windowsIndex;
         }
     }
+    public void CloseWindows()
+    {
+        _windowsSettings.SetActive(false);
+        _windowsShop.SetActive(false);
+    }
 
     private void UpdateUI()
     {
