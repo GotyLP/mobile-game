@@ -1,55 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class SavePlayerPrefs : MonoBehaviour
 {
-    [SerializeField] int _currency = 10;
-    [SerializeField] float _life = 10;
-    [SerializeField] string _playerName = "Wachin";
-    private void Awake()
+    public Transform jugadorTransform; // Asigna el transform del jugador
+    public int vida = 100;
+    public int puntos = 0;
+
+    string rutaArchivo => Path.Combine(Application.persistentDataPath, "jugador.json");
+
+    public void GuardarDatos()
     {
-           LoadData();
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Menu)) 
+        SaveData data = new SaveData
         {
-            SaveData();
-            Debug.Log("Data Saved: ");
+            posX = jugadorTransform.position.x,
+            posY = jugadorTransform.position.y,
+            posZ = jugadorTransform.position.z,
+            life = vida,
+            Points = puntos
+        };
+
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(rutaArchivo, json);
+        Debug.Log("Datos guardados en: " + rutaArchivo);
+    }
+
+    public void CargarDatos()
+    {
+        if (File.Exists(rutaArchivo))
+        {
+            string json = File.ReadAllText(rutaArchivo);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+            jugadorTransform.position = new Vector3(data.posX, data.posY, data.posZ);
+            vida = data.life;
+            puntos = data.Points;
+
+            Debug.Log("Datos cargados: Vida = " + vida + ", Puntos = " + puntos);
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró archivo de guardado.");
         }
     }
-
-    public void SaveData()
-    {
-        Debug.Log("Saving Data...");
-        PlayerPrefs.SetInt(PlayerPrefKeys.KeyCurrency, _currency);
-        PlayerPrefs.SetFloat(PlayerPrefKeys.KeyLife, _life);
-        PlayerPrefs.SetString(PlayerPrefKeys.KeyPlayerName, _playerName); 
-
-        PlayerPrefs.Save(); 
-    }
-    public void LoadData()
-    {
-        Debug.Log("Loading Data...");
-        _currency = PlayerPrefs.GetInt("CurrencyKey", _currency);
-        _life = PlayerPrefs.GetFloat(PlayerPrefKeys.KeyLife, PlayerPrefKeys.defaultValueLife);         
-        _playerName = PlayerPrefs.GetString("playerNameKey", _playerName);
-    }
-    public void DeleteData()
-    {
-        PlayerPrefs.DeleteKey("CurrencyKey");
-        PlayerPrefs.DeleteAll();
-        Debug.Log("Data Deleted");
-    }
-    private void OnApplicationPause(bool pause)
-    {
-        if (pause) SaveData();  
-    }
-    private void OnApplicationQuit()
-    {
-        Debug.Log("Saving Data...");
-        SaveData();
-    }
 }
-

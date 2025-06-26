@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class SaveWithJson : MonoBehaviour
 {
+    public Transform jugadorTransform; // Asigna el transform del jugador
     [SerializeField] SaveData _mySave = new SaveData();
     [SerializeField] string _path;
     string _previusPath;

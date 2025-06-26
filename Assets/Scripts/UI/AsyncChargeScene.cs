@@ -8,6 +8,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class AsyncChargeScene : MonoBehaviour
 {
     [SerializeField] Image _loadingImage;
+    public StaminaSystem stamina;
     [SerializeField] GameObject _panelLoading, _playGamebutton;
     AsyncOperation _myScene;
     private void Start()
@@ -20,21 +21,29 @@ public class AsyncChargeScene : MonoBehaviour
 
     IEnumerator LoadingMyScene(string sceneName)
     {
-        _panelLoading.SetActive(true);
-        _myScene = SceneManager.LoadSceneAsync(sceneName);
-        LoadLevel(false);
-
-        Application.backgroundLoadingPriority = ThreadPriority.Low;
-        while (!_myScene.isDone)
+        if(stamina._currentStamina>=3)
         {
-            float progress = Mathf.Clamp01(_myScene.progress / 0.9f);
-            yield return new  WaitForEndOfFrame();
-            _loadingImage.fillAmount = Mathf.MoveTowards(_loadingImage.fillAmount, progress, Time.deltaTime);
-            if(_loadingImage.fillAmount >= 1)
+            _panelLoading.SetActive(true);
+            _myScene = SceneManager.LoadSceneAsync(sceneName);
+            LoadLevel(false);
+
+            Application.backgroundLoadingPriority = ThreadPriority.Low;
+            while (!_myScene.isDone)
             {
-                _playGamebutton.SetActive(true);
+                float progress = Mathf.Clamp01(_myScene.progress / 0.9f);
+                yield return new WaitForEndOfFrame();
+                _loadingImage.fillAmount = Mathf.MoveTowards(_loadingImage.fillAmount, progress, Time.deltaTime);
+                if (_loadingImage.fillAmount >= 1)
+                {
+                    _playGamebutton.SetActive(true);
+                }
             }
         }
+        else
+        {
+            Debug.Log("Not enough stamina to continue");           
+        }
+
 
     }
     public void LoadLevel(bool value)=>_myScene.allowSceneActivation = value; // Permite activar la escena una vez que se ha cargado completamente

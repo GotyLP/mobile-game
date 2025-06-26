@@ -10,11 +10,11 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton: asegura solo una instancia
+       
         if (instancia == null)
         {
             instancia = this;
-            DontDestroyOnLoad(gameObject); // Persiste entre escenas
+            DontDestroyOnLoad(gameObject); 
 
             // Cargar preferencias
             volumenActual = PlayerPrefs.GetFloat("volumen", 1f);
@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject); // Evita duplicados
+            Destroy(gameObject); 
         }
     }
 
@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
 
         AplicarVolumen();
 
-        // Guardar
+        
         PlayerPrefs.SetFloat("volumen", volumenActual);
         PlayerPrefs.SetInt("muteado", estaMuteado ? 1 : 0);
     }
@@ -45,7 +45,7 @@ public class AudioManager : MonoBehaviour
         estaMuteado = mute;
         AplicarVolumen();
 
-        // Guardar
+        
         PlayerPrefs.SetFloat("volumen", volumenActual);
         PlayerPrefs.SetInt("muteado", estaMuteado ? 1 : 0);
     }

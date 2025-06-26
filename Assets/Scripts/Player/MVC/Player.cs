@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerModel Model { get; private set; }
     private PlayerView _view;
     private PlayerController _controller;
+    
 
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
@@ -42,7 +43,6 @@ public class Player : MonoBehaviour
 
         EventManager.Subscribe(SimpleEventType.PlayerDeathEvent, DisableComponent);
     }
-
     void Update()
     {
         _controller.UpdateInputs();
@@ -100,6 +100,17 @@ public class Player : MonoBehaviour
     private void DisableComponent()
     {
         enabled = false;   
+    }
+    public void UpdateLife()
+    {
+        Debug.Log("MAS VIDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        Model.AddLife();
+    }
+
+    public void UpdateSpeed()
+    {
+        Debug.Log("MAS SPEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED");
+        Model.AddSpeed();
     }
 
     private void OnDestroy()

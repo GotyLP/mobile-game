@@ -6,7 +6,7 @@ public class BulletEnemy : MonoBehaviour
 {
     [SerializeField] private float _lifeTime;
     [SerializeField] private float speed = 3f;
-    [SerializeField] private float dmg = 25f;
+    [SerializeField] private float dmg = 10f;
 
     private float _currentLifeTime;
     private Vector3 _direction;

@@ -8,6 +8,8 @@ public class SaveData
 {
     public Transform playerTransform;
     public string playerName = "player";
-    public int life = 100;
-    public int mana = 100;
+    public int life ;
+    public int mana;
+    public int Points;
+    public float posX, posY, posZ;
 }

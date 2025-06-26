@@ -12,7 +12,7 @@ public class StaminaSystem : MonoBehaviour
     DateTime _lastStaminaTime;
 
     [SerializeField] int _maxStamina = 10;   
-    int _currentStamina = 10;
+    public int _currentStamina = 10;
 
     [SerializeField] float _timeToRecharge = 10;
     [SerializeField] TextMeshProUGUI _staminaText,_timerText;
@@ -30,6 +30,10 @@ public class StaminaSystem : MonoBehaviour
             DisplayNotif();
         }
         
+    }
+    public void AddStamina()
+    {
+        _currentStamina += 3;
     }
     IEnumerator ChargingStamina()
     {
@@ -118,7 +122,7 @@ public class StaminaSystem : MonoBehaviour
     }
     void UpdateStamina()
     {
-        _staminaText.text = $"Stamina: {_currentStamina}/{_maxStamina}";
+        _staminaText.text = $"{_currentStamina}/{_maxStamina}";
     }
     void SaveGame()
     {

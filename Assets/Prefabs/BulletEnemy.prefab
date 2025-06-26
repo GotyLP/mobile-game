@@ -120,4 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lifeTime: 3
   speed: 3
-  dmg: 25
+  dmg: 5

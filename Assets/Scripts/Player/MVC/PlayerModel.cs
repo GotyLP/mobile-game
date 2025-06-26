@@ -7,10 +7,11 @@ public class PlayerModel
 {
     Rigidbody _rb;
     IController _controller;
-    float _speed;
-    
-    private float _currentLife;
-    private float _maxLife;
+    [SerializeField] float _speed;
+
+
+    [SerializeField] private float _currentLife;
+    public float _maxLife;
     private AttackSystem _attackSystem;
     private Inventory _inventory;
     private CharacterController _characterController;
@@ -108,7 +109,7 @@ public class PlayerModel
     }
 
     public void TakeDamage(float damage)
-    {
+    {       
         _currentLife -= damage;
         _currentLife = Mathf.Max(0, _currentLife); // Avoid negative life
         
@@ -118,6 +119,18 @@ public class PlayerModel
         {
             EventManager.Trigger(SimpleEventType.PlayerDeathEvent);
         }
+    }
+    public void AddSpeed()
+    {
+        _speed += 10;
+        Debug.Log($"Speed increased to {_speed}");
+    }
+    public void AddLife()
+    {
+        _maxLife += 50;
+        _currentLife = MaxLife;
+        Debug.Log($"Max life increased to {_maxLife}");
+        //_currentLife = Mathf.Min(_maxLife, _currentLife); // Avoid exceeding max life       
     }
 
     public void Heal(float amount)
