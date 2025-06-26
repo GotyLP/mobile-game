@@ -20,11 +20,10 @@ public void Buy()
     if (CurrenciManager.Instance.UsePoints(cost))
     {
         Debug.Log("Compra realizada con éxito.");
-        // Aquí puedes activar lo comprado (ej: desbloquear personaje)
     }
     else
     {
-        Debug.Log("No tienes suficientes puntos para esta compra.");
+        Debug.Log("No tienes suficientes puntos ");
     }
 
     ActualizeUi();
@@ -32,7 +31,7 @@ public void Buy()
 
 void ActualizeUi()
 {
-    TextPoints.text = "Puntos: " + CurrenciManager.Instance.GetPoints();
+    TextPoints.text = "Coins: " + CurrenciManager.Instance.GetPoints();
 }
 }
 
