@@ -8,10 +8,9 @@ public class DataSceneController : MonoBehaviour
    
     public static DataSceneController Instance;
     public LifeHandler lifeHandler;
-    [SerializeField]private float life;
+    [SerializeField] private float life;
     private void Awake()
     {
-        life = lifeHandler._currentLife;
         if (Instance == null)
         {
             Instance = this;

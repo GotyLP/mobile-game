@@ -6,6 +6,7 @@ TagManager:
   tags:
   - VolumeSlider
   - MuteToggle
+  - Damage
   layers:
   - Default
   - TransparentFX
@@ -13,10 +14,10 @@ TagManager:
   - Floor
   - Water
   - UI
-  - Enemies
+  - Enemy
   - Player
-  - 
-  - 
+  - Roof
+  - Damage
   - 
   - 
   - 

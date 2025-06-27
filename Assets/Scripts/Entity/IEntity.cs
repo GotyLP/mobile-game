@@ -4,7 +4,6 @@ using UnityEngine;
 
 public interface IEntity
 {
-   public void GetDamage(float damage);
-    public void OnDead();
-   
+    void GetDamage(float damage);
+    void OnDead();
 }

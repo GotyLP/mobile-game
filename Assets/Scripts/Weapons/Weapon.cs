@@ -6,12 +6,12 @@ public class Weapon : MonoBehaviour, IWeapon
 {
     private WeaponItem _weaponData;
     private float _lastAttackTime = -Mathf.Infinity;
-    private Attack _attackComponent;
+    private AttackSystem _attackSystem;
 
-    public void Initialize(WeaponItem weaponData, Attack attackComponent)
+    public void Initialize(WeaponItem weaponData, AttackSystem attackSystem)
     {
         _weaponData = weaponData;
-        _attackComponent = attackComponent;
+        _attackSystem = attackSystem;
     }
 
     public void Attack(Player player)
@@ -20,12 +20,11 @@ public class Weapon : MonoBehaviour, IWeapon
             return;
 
         _lastAttackTime = Time.time;
-        _attackComponent.ActivateObject();
-        Debug.Log("¡Ataque de " + _weaponData.weaponName + "! Daño: " + _weaponData.damage);
+        _attackSystem?.ExecuteAttack(_weaponData);
     }
 
     public void StopAttack()
     {
-        _attackComponent.DeactivateObject();
+        _attackSystem?.StopAttack(_weaponData);
     }
 }

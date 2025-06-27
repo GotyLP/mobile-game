@@ -1,33 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Bridge/Adapter between Unity's MonoBehaviour world and MVC Model
+/// Receives damage from scene interactions and delegates to PlayerModel
+/// </summary>
 public class LifeHandler : MonoBehaviour, IEntity
 {
-    public PauseMenu pauseMenu;
-    //public DataSceneController dataControler;
-    [SerializeField] float initialLife = 100;
-    public float _currentLife;
-    private void Awake()
+    private Player _player;
+    private PlayerModel _model;
+
+
+    void Start()
     {
-        //_currentLife = dataControler.RealLife;
-        _currentLife = initialLife;
+        // Verificar que no estamos en una escena de menú
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName.Contains("Menu") || currentSceneName.Contains("MainMenu"))
+        {
+            Debug.LogWarning($"LifeHandler: Detectado en escena de menú '{currentSceneName}'. Desactivando componente.");
+            enabled = false;
+            return;
+        }
+
+        _player = GetComponent<Player>();        
+        if (_player != null)
+        {
+            _model = _player.Model;
+        }
+        else
+        {
+            Debug.LogError("LifeHandler: Cannot find Player component");
+        }
+        EventManager.Subscribe(SimpleEventType.PlayerDeathEvent, OnDead);
     }
+
+    void OnDestroy()
+    {
+        EventManager.Unsubscribe(SimpleEventType.PlayerDeathEvent, OnDead);
+    }
+
+    /// <summary>
+    /// Called by external systems (bullets, enemies, etc.) via IEntity interface
+    /// </summary>
     public void GetDamage(float dmg)
     {
-        _currentLife -= dmg;
-        Debug.Log("Me daño");        
-        EventManager.Trigger(new PlayerHealthChangedEvent(_currentLife, initialLife));
-        if (_currentLife <= 0) 
+        if (_model != null)
         {
-            OnDead();            
+            Debug.Log($"LifeHandler: Received {dmg} damage, delegating to Model");
+            _model.TakeDamage(dmg);
         }
     }
+
     public void OnDead()
     {
-        EventManager.Trigger(SimpleEventType.PlayerDeathEvent);
-        Time.timeScale = 0;
-        Debug.Log("Dead");
+        // Verificar nuevamente que no estamos en una escena de menú
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName.Contains("Menu") || currentSceneName.Contains("MainMenu"))
+        {
+            Debug.LogWarning($"LifeHandler: OnDead() llamado en escena de menú '{currentSceneName}'. Ignorando.");
+            return;
+        }
+
+        Time.timeScale = 0; // Pause the game
+        Debug.Log("Player Dead - Game Paused");        
     }
 }
+
 
