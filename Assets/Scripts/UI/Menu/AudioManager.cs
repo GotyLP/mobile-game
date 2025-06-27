@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public float volumenActual = 1f;
     [HideInInspector] public bool estaMuteado = false;
 
+    public static object Instance { get; internal set; }
+
     private void Awake()
     {
        

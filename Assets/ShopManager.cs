@@ -6,24 +6,37 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour
 {
     public Text TextPoints;
-    public Button BuyButton;   
+    public Button BuyButton;
+    public AudioClip sound1; 
+    public AudioClip sound2; 
 
-public int cost = 30;
+    private AudioSource audioSource;
+
+    public int cost = 30;
 
 void Start()
 {
-    ActualizeUi();
-}
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        ActualizeUi();       
+    }
 
 public void Buy()
 {
     if (CurrenciManager.Instance.UsePoints(cost))
     {
-        Debug.Log("Compra realizada con éxito.");
+            audioSource.clip = sound1;
+            audioSource.Play();
+            Debug.Log("Compra realizada con éxito.");
     }
     else
     {
-        Debug.Log("No tienes suficientes puntos ");
+            audioSource.clip = sound2;
+            audioSource.Play();
+            Debug.Log("No tienes suficientes puntos ");
     }
 
     ActualizeUi();

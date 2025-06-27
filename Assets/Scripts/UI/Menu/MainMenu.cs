@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject _windowsSettings;
     [SerializeField] private GameObject _windowsShop;
     [SerializeField] private GameObject _windowsMenu;
+    [SerializeField] private GameObject _windowsWarning;
     public GameObject[] Windows;
     private int windowsIndex = -1;
 
@@ -73,6 +74,16 @@ public class MainMenu : MonoBehaviour
     {
         _windowsSettings.SetActive(false);
         _windowsShop.SetActive(false);
+        _windowsWarning.SetActive(false);
+    }
+    public void OpenWarning()
+    {       
+        _windowsWarning.SetActive(true);
+    }
+    public void CloseWarning()
+    {
+       
+        _windowsWarning.SetActive(false);
     }
 
     private void UpdateUI()

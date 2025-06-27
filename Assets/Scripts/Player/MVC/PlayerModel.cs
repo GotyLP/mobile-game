@@ -2,13 +2,13 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class PlayerModel
 {
     Rigidbody _rb;
     IController _controller;
-    [SerializeField] float _speed;
-
+    [SerializeField] float _speed;   
 
     [SerializeField] private float _currentLife;
     public float _maxLife;
@@ -23,11 +23,11 @@ public class PlayerModel
     private float _rotationSpeed = 10f;
     private Vector3 _lastMovementDirection;
 
-    public event Action<float, float> OnMovement = delegate { };
+    public event Action<float, float> OnMovement = delegate { };   
+
 
     public float CurrentLife => _currentLife;
     public float MaxLife => _maxLife;
-
     public PlayerModel(Player user)
     {
         _rb = user.Rigidbody;
@@ -41,8 +41,9 @@ public class PlayerModel
         
         // Initialize velocity
         _velocity = Vector3.zero;
-    }
-
+        EventManager.Trigger(new PlayerHealthChangedEvent(_currentLife, _maxLife));
+        Debug.Log("PlayerModel initialized with current Life: " + _currentLife);
+    }    
     public void Move(Vector3 direction)
     {
         if (direction.sqrMagnitude > 1)
@@ -109,7 +110,7 @@ public class PlayerModel
     }
 
     public void TakeDamage(float damage)
-    {       
+    {        
         _currentLife -= damage;
         _currentLife = Mathf.Max(0, _currentLife); // Avoid negative life
         
@@ -122,7 +123,7 @@ public class PlayerModel
     }
     public void AddSpeed()
     {
-        _speed += 10;
+        _speed += 5;
         Debug.Log($"Speed increased to {_speed}");
     }
     public void AddLife()

@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        StartLife = SaveData.life !=0 ? SaveData.life : StartLife ; // Asignar vida inicial desde SaveData
         CharacterController = GetComponent<CharacterController>();      
         Rigidbody = GetComponent<Rigidbody>();    
         Animator = GetComponent<Animator>();
@@ -103,13 +104,13 @@ public class Player : MonoBehaviour
     }
     public void UpdateLife()
     {
-        Debug.Log("MAS VIDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        
         Model.AddLife();
     }
 
     public void UpdateSpeed()
     {
-        Debug.Log("MAS SPEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED");
+        
         Model.AddSpeed();
     }
 
