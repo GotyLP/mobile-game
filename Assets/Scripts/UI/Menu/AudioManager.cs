@@ -9,9 +9,8 @@ public class AudioManager : MonoBehaviour
     private const string VolumeKey = "Volume";
     private const string MuteKey = "Muted";
 
-    void Start()
-    {
-        // Cargar valores guardados
+    void Start()    {
+        
         float savedVolume = PlayerPrefs.GetFloat(VolumeKey, 1f);
         bool isMuted = PlayerPrefs.GetInt(MuteKey, 0) == 1;
 
