@@ -12,39 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"23da3f41-4576-4b96-a300-966b6dc0e1c6\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"ActualLevel\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"036e1fe2-9e4a-45cb-a7ca-45208dde3b43\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"ShouldShowPrototype\",\r\n      \"type\": \"bool\",\r\n      \"value\":
-    false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"601b322e-de59-4d5d-aa22-f0520ba9129b\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"MenuText\",\r\n      \"type\": \"string\",\r\n     
-    \"value\": \"Welcome stranger\"\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"0a79844e-416c-48a4-ac27-ed0eeb50055e\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerScore\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"153914a7-0a6c-4d56-a76f-be30fe7a7bd9\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"EnemyEnergy\",\r\n      \"type\": \"float\",\r\n      \"value\": 1.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"841374c3-65e1-49b1-bf49-a70c1cf29a37\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"GameDifficulty\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 10.0\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"23da3f41-4576-4b96-a300-966b6dc0e1c6\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"ActualLevel\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"036e1fe2-9e4a-45cb-a7ca-45208dde3b43\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"ShouldShowPrototype\",\r\n      \"type\": \"bool\",\r\n      \"value\":
-    false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"601b322e-de59-4d5d-aa22-f0520ba9129b\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"MenuText\",\r\n      \"type\": \"string\",\r\n     
-    \"value\": \"Welcome stranger\"\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"0a79844e-416c-48a4-ac27-ed0eeb50055e\"\r\n    },\r\n   
-    \"rs\": {\r\n      \"key\": \"PlayerScore\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"153914a7-0a6c-4d56-a76f-be30fe7a7bd9\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"EnemyEnergy\",\r\n      \"type\": \"float\",\r\n      \"value\": 1.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"841374c3-65e1-49b1-bf49-a70c1cf29a37\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"GameDifficulty\",\r\n      \"type\":
-    \"float\",\r\n      \"value\": 10.0\r\n    }\r\n  }\r\n]"
-  _environments: "[\r\n  {\r\n    \"projectId\": \"5ab064cd-096c-4c45-9b07-810323c27414\",\r\n   
-    \"name\": \"production\",\r\n    \"id\": \"f86b5228-f962-4b6d-b3b8-106cdd4d780d\",\r\n   
-    \"isDefault\": true,\r\n    \"createdAt\": \"2025-04-03T21:27:06Z\",\r\n    \"updatedAt\":
-    \"2025-04-03T21:27:06Z\"\r\n  }\r\n]"
+  _rsKeyList: '[]'
+  _rsLastCachedKeyList: '[]'
+  _environments: '[]'

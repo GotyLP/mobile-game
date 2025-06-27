@@ -14,10 +14,9 @@ public class MeleeAttack : IAttackBehavior
             damageCollider.SetActive(true);
             Debug.Log($"MeleeAttack: DamageCollider activado - Estado actual: {damageCollider.activeInHierarchy}");
             
-            // Lógica específica del ataque cuerpo a cuerpo
+      
             Debug.Log($"¡Ataque cuerpo a cuerpo de {weaponData.weaponName}! Daño: {weaponData.damage}");
             
-            // Aquí podrías agregar efectos de partículas, sonidos, etc.
             PlayAttackEffects(weaponData, attacker);
         }
         else
@@ -42,7 +41,6 @@ public class MeleeAttack : IAttackBehavior
 
     private void PlayAttackEffects(WeaponItem weaponData, Transform attacker)
     {
-        // Implementar efectos específicos del ataque cuerpo a cuerpo
-        // Por ejemplo: partículas, sonidos, screen shake, etc.
+       
     }
 } 
