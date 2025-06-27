@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class PlayOnCollision : MonoBehaviour
 {
-    public AudioClip triggerSound;
+    public AudioClip sound1;
+    public AudioClip sound2;
+
     private AudioSource audioSource;
 
     void Start()
-    {
-        // Intenta obtener un AudioSource existente o añade uno
+    {        
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
@@ -15,11 +16,13 @@ public class PlayOnCollision : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (other.CompareTag("Damage"))
         {
-            if (triggerSound != null)
+            AudioClip selectedClip = Random.value > 0.5f ? sound1 : sound2;
+
+            if (selectedClip != null)
             {
-                audioSource.PlayOneShot(triggerSound);
+                audioSource.PlayOneShot(selectedClip);
             }
         }
     }

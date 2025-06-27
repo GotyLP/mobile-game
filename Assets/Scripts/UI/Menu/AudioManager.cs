@@ -3,57 +3,41 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instancia;
+    public Slider volumeSlider;
+    public Toggle muteToggle;
 
-    [HideInInspector] public float volumenActual = 1f;
-    [HideInInspector] public bool estaMuteado = false;
+    private const string VolumeKey = "Volume";
+    private const string MuteKey = "Muted";
 
-    public static object Instance { get; internal set; }
-
-    private void Awake()
+    void Start()
     {
-       
-        if (instancia == null)
-        {
-            instancia = this;
-            DontDestroyOnLoad(gameObject); 
+        // Cargar valores guardados
+        float savedVolume = PlayerPrefs.GetFloat(VolumeKey, 1f);
+        bool isMuted = PlayerPrefs.GetInt(MuteKey, 0) == 1;
 
-            // Cargar preferencias
-            volumenActual = PlayerPrefs.GetFloat("volumen", 1f);
-            estaMuteado = PlayerPrefs.GetInt("muteado", 0) == 1;
+        volumeSlider.value = savedVolume;
+        muteToggle.isOn = isMuted;
 
-            AplicarVolumen();
-        }
-        else
-        {
-            Destroy(gameObject); 
-        }
+        ApplyVolume(savedVolume, isMuted);
+
+        volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        muteToggle.onValueChanged.AddListener(OnMuteToggled);
     }
 
-    public void EstablecerVolumen(float volumen)
+    void OnVolumeChanged(float value)
     {
-        volumenActual = volumen;
-        estaMuteado = volumen <= 0f;
-
-        AplicarVolumen();
-
-        
-        PlayerPrefs.SetFloat("volumen", volumenActual);
-        PlayerPrefs.SetInt("muteado", estaMuteado ? 1 : 0);
+        PlayerPrefs.SetFloat(VolumeKey, value);
+        ApplyVolume(value, muteToggle.isOn);
     }
 
-    public void EstablecerMute(bool mute)
+    void OnMuteToggled(bool isMuted)
     {
-        estaMuteado = mute;
-        AplicarVolumen();
-
-        
-        PlayerPrefs.SetFloat("volumen", volumenActual);
-        PlayerPrefs.SetInt("muteado", estaMuteado ? 1 : 0);
+        PlayerPrefs.SetInt(MuteKey, isMuted ? 1 : 0);
+        ApplyVolume(volumeSlider.value, isMuted);
     }
 
-    private void AplicarVolumen()
+    void ApplyVolume(float volume, bool isMuted)
     {
-        AudioListener.volume = estaMuteado ? 0f : volumenActual;
+        AudioListener.volume = isMuted ? 0f : volume;
     }
 }
