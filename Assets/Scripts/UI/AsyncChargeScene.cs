@@ -27,16 +27,19 @@ public class AsyncChargeScene : MonoBehaviour
             _myScene = SceneManager.LoadSceneAsync(sceneName);
             LoadLevel(false);
 
-            Application.backgroundLoadingPriority = ThreadPriority.Low;
+            Application.backgroundLoadingPriority = ThreadPriority.Normal;
+            
             while (!_myScene.isDone)
             {
                 float progress = Mathf.Clamp01(_myScene.progress / 0.9f);
-                yield return new WaitForEndOfFrame();
-                _loadingImage.fillAmount = Mathf.MoveTowards(_loadingImage.fillAmount, progress, Time.deltaTime);
-                if (_loadingImage.fillAmount >= 1)
+                _loadingImage.fillAmount = Mathf.Lerp(_loadingImage.fillAmount, progress, Time.deltaTime * 2f);
+                
+                if (_loadingImage.fillAmount >= 0.99f && _myScene.progress >= 0.9f)
                 {
                     _playGamebutton.SetActive(true);
                 }
+                
+                yield return null;
             }
         }
         else

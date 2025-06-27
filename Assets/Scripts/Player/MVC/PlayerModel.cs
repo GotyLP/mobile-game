@@ -118,7 +118,7 @@ public class PlayerModel
         
         if (_currentLife <= 0)  
         {
-            EventManager.Trigger(SimpleEventType.PlayerDeathEvent);
+            EventManager.Trigger(SimpleEventType.PlayerDeathEvent);            
         }
     }
     public void AddSpeed()

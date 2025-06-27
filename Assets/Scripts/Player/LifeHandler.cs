@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Bridge/Adapter between Unity's MonoBehaviour world and MVC Model
@@ -14,6 +15,15 @@ public class LifeHandler : MonoBehaviour, IEntity
 
     void Start()
     {
+        // Verificar que no estamos en una escena de menú
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName.Contains("Menu") || currentSceneName.Contains("MainMenu"))
+        {
+            Debug.LogWarning($"LifeHandler: Detectado en escena de menú '{currentSceneName}'. Desactivando componente.");
+            enabled = false;
+            return;
+        }
+
         _player = GetComponent<Player>();        
         if (_player != null)
         {
@@ -45,6 +55,14 @@ public class LifeHandler : MonoBehaviour, IEntity
 
     public void OnDead()
     {
+        // Verificar nuevamente que no estamos en una escena de menú
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName.Contains("Menu") || currentSceneName.Contains("MainMenu"))
+        {
+            Debug.LogWarning($"LifeHandler: OnDead() llamado en escena de menú '{currentSceneName}'. Ignorando.");
+            return;
+        }
+
         Time.timeScale = 0; // Pause the game
         Debug.Log("Player Dead - Game Paused");        
     }

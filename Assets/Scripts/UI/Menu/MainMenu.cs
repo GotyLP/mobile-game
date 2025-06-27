@@ -19,30 +19,80 @@ public class MainMenu : MonoBehaviour
     public GameObject[] Windows;
     private int windowsIndex = -1;
 
+    [Header("Default Values (cuando RemoteConfig no está disponible)")]
+    [SerializeField] private bool _defaultShowPrototype = false;
+    [SerializeField] private string _defaultMenuText = "Main Menu";
+    [SerializeField] private int _defaultLevel = 1;
+
+    private void Awake()
+    {
+        Time.timeScale = 1f;
+    }
+
     private void Start()
     {
         Debug.Log("MainMenu Start - RemoteConfig Instance: " + (RemoteConfig.Instance != null));
         
         if (RemoteConfig.Instance != null)
         {
+            Debug.Log("RemoteConfig encontrado, esperando inicialización...");
             StartCoroutine(WaitForRemoteConfig());
         }
         else
         {
-            Debug.LogError("RemoteConfig.Instance es null. Asegúrate de que el RemoteConfig esté en la escena y se haya inicializado correctamente.");
+            Debug.LogWarning("RemoteConfig.Instance es null. Usando valores por defecto del Inspector.");
+            UpdateUIWithDefaults();
         }
     }
 
     private IEnumerator WaitForRemoteConfig()
     {
-        while (string.IsNullOrEmpty(RemoteConfig.Instance.MenuText))
+        // Esperar un tiempo máximo para evitar bucles infinitos
+        float maxWaitTime = 5f;
+        float waitedTime = 0f;
+        
+        while (string.IsNullOrEmpty(RemoteConfig.Instance.MenuText) && waitedTime < maxWaitTime)
         {
             Debug.Log("Esperando a que RemoteConfig esté listo...");
             yield return new WaitForSeconds(0.1f);
+            waitedTime += 0.1f;
         }
 
-        UpdateUI();
+        if (waitedTime >= maxWaitTime)
+        {
+            Debug.LogWarning("RemoteConfig tardó demasiado en cargar. Usando valores por defecto.");
+            UpdateUIWithDefaults();
+        }
+        else
+        {
+            UpdateUI();
+        }
     }
+
+    private void UpdateUIWithDefaults()
+    {
+        Debug.Log("Actualizando UI con valores por defecto");
+        
+        if (_prototypeButton != null)
+        {
+            _prototypeButton.gameObject.SetActive(_defaultShowPrototype);
+        }
+        else
+        {
+            Debug.LogWarning("Prototype Button no asignado en el Inspector");
+        }
+
+        if (_menuTitleText != null)
+        {
+            Debug.Log("Actualizando texto del menú a valor por defecto: " + _defaultMenuText);
+            _menuTitleText.text = _defaultMenuText;
+        }
+        else
+        {
+            Debug.LogWarning("Menu Title Text no asignado en el Inspector");
+        }
+    }
+
     public void WindowsToggle(int _windowsIndex)
     {
         if (_windowsIndex < 0 || _windowsIndex >= Windows.Length)
@@ -113,17 +163,10 @@ public class MainMenu : MonoBehaviour
 
     public void OnPlayButtonClicked()
     {
-        int currentLevel = RemoteConfig.Instance.ActualLevel;
+        // Usar valor por defecto si RemoteConfig no está disponible
+        int currentLevel = RemoteConfig.Instance != null ? RemoteConfig.Instance.ActualLevel : _defaultLevel;
         string levelName = $"Level{currentLevel}";
         Debug.Log($"Cargando nivel: {levelName}");
-        
-        // Desactivar el Canvas
-        //Canvas menuCanvas = GetComponentInParent<Canvas>();
-        //if (menuCanvas != null)
-        //{
-        //    Debug.Log("Desactivando Canvas del menú");
-        //    menuCanvas.gameObject.SetActive(false);
-        //}
         
         SceneManager.LoadScene(levelName);
     }

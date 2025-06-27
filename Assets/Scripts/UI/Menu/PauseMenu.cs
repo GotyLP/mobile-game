@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
     public GameObject warningMenu;
+    [Header("Loading UI")]
+    public GameObject loadingPanel; // Panel de carga opcional
     // public GameObject pausePanel;
 
     private void OnEnable()
@@ -30,11 +32,36 @@ public class PauseMenu : MonoBehaviour
     {
         OpenMenu();
     }
-    public void ChangeSceneByIndex(int sceneIndex) // Cambiar escena por Build Settings
+    
+    public void ChangeSceneByIndex(int sceneIndex) // Cambiar escena por Build Settings usando carga asíncrona
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(sceneIndex);
+        StartCoroutine(LoadSceneAsync(sceneIndex));
     }
+    
+    private IEnumerator LoadSceneAsync(int sceneIndex)
+    {
+        // Mostrar panel de carga si existe
+        if (loadingPanel != null)
+            loadingPanel.SetActive(true);
+            
+        // Iniciar carga asíncrona
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex);
+        
+        // Configurar prioridad normal para mejor rendimiento
+        Application.backgroundLoadingPriority = ThreadPriority.Normal;
+        
+        // Esperar hasta que la escena esté completamente cargada
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        
+        // Ocultar panel de carga
+        if (loadingPanel != null)
+            loadingPanel.SetActive(false);
+    }
+    
     public void ActivateObject()
     {
         if (pauseMenu != null)
