@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        StartLife = SaveData.life !=0 ? SaveData.life : StartLife ; 
+        StartLife = SaveData.life !=0 ? SaveData.life : StartLife ; // Asignar vida inicial desde SaveData
         CharacterController = GetComponent<CharacterController>();      
         Rigidbody = GetComponent<Rigidbody>();    
         Animator = GetComponent<Animator>();

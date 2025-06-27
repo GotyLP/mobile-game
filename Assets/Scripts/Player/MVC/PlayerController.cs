@@ -9,7 +9,7 @@ public class PlayerController : IController
     private IInputProvider _inputProvider;
     private Vector3 _direction;
     private bool _isAttacking;
-    private bool _uiAttackMode = false; 
+    private bool _uiAttackMode = false; // Flag to know is attack controller is from UI
 
     public PlayerController(Player user)
     {

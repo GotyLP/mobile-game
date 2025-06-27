@@ -23,6 +23,7 @@ public class AttackSystem
         {
             { AttackType.Melee, new MeleeAttack() },
             { AttackType.Ranged, new RangedAttack() }
+            // Agregar más tipos según necesidad
         };
         
         Debug.Log($"AttackSystem: Inicializados {_attackBehaviors.Count} tipos de ataque");
@@ -64,6 +65,7 @@ public class AttackSystem
         }
     }
 
+    // Método para agregar nuevos tipos de ataque dinámicamente
     public void RegisterAttackBehavior(AttackType attackType, IAttackBehavior attackBehavior)
     {
         _attackBehaviors[attackType] = attackBehavior;
