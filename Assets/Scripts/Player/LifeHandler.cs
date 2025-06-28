@@ -54,14 +54,7 @@ public class LifeHandler : MonoBehaviour, IEntity
     }
 
     public void OnDead()
-    {
-        // Verificar nuevamente que no estamos en una escena de menú
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName.Contains("Menu") || currentSceneName.Contains("MainMenu"))
-        {
-            Debug.LogWarning($"LifeHandler: OnDead() llamado en escena de menú '{currentSceneName}'. Ignorando.");
-            return;
-        }
+    {      
 
         Time.timeScale = 0; // Pause the game
         Debug.Log("Player Dead - Game Paused");        

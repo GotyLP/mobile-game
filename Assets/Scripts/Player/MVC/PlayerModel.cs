@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerModel
 {
@@ -17,6 +18,9 @@ public class PlayerModel
     private CharacterController _characterController;
     private Transform _transform;
 
+    private Player _player;
+
+
     // Movement and rotation variables
     private Vector3 _velocity;
     private float _gravity = -9.81f;
@@ -30,6 +34,7 @@ public class PlayerModel
     public float MaxLife => _maxLife;
     public PlayerModel(Player user)
     {
+        _player = user;
         _rb = user.Rigidbody;
         _speed = user.Speed;
         _maxLife = user.StartLife;
@@ -41,7 +46,6 @@ public class PlayerModel
         
         // Initialize velocity
         _velocity = Vector3.zero;
-        EventManager.Trigger(new PlayerHealthChangedEvent(_currentLife, _maxLife));
         Debug.Log("PlayerModel initialized with current Life: " + _currentLife);
     }    
     public void Move(Vector3 direction)

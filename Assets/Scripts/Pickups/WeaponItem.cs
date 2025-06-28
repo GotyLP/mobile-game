@@ -6,9 +6,7 @@ public enum AttackType
 {
     Melee,
     Ranged,
-    // Agregar más tipos según necesidad
 }
-
 [CreateAssetMenu(menuName = "Items/Weapon")]
 public class WeaponItem : ScriptableObject
 {

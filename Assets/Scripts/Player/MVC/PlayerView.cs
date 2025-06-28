@@ -21,7 +21,7 @@ public class PlayerView
     public PlayerView(Player user)
     {
         _animator = user.Animator;
-
+        //animator.GetBehaviours<BreathBehaviour>();
         var model = user.Model;
         if (model == null) 
         {
