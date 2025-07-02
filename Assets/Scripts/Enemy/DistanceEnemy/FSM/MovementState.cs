@@ -43,7 +43,6 @@ public class MovementState : IState
 
     public void OnUpdate()
     {
-        Debug.Log("OnUpdate MovementState");        
 
         if (_waypoints.Length == 0) return;
 

@@ -19,9 +19,9 @@ public class PlayerModel
     private Transform _transform;
 
     private Player _player;
+    private PlayerView _playerView;
 
 
-    // Movement and rotation variables
     private Vector3 _velocity;
     private float _gravity = -9.81f;
     private float _rotationSpeed = 10f;
@@ -47,6 +47,11 @@ public class PlayerModel
         // Initialize velocity
         _velocity = Vector3.zero;
         Debug.Log("PlayerModel initialized with current Life: " + _currentLife);
+    }
+
+    public void SetView(PlayerView view)
+    {
+        _playerView = view;
     }    
     public void Move(Vector3 direction)
     {
@@ -97,7 +102,14 @@ public class PlayerModel
     {
         if (_inventory != null && _inventory.GetCurrentWeaponData() != null)
         {
-            _attackSystem?.ExecuteAttack(_inventory.GetCurrentWeaponData());
+            WeaponItem currentWeapon = _inventory.GetCurrentWeaponData();
+            
+            if (_playerView != null && !string.IsNullOrEmpty(currentWeapon.animationTrigger))
+            {
+                _playerView.TriggerAttackAnimation(currentWeapon.animationTrigger);
+            }
+            
+            _attackSystem?.ExecuteAttack(currentWeapon);
         }
         else
         {

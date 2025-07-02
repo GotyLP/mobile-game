@@ -25,7 +25,20 @@ public class Damage : MonoBehaviour
             WeaponItem currentWeaponData = _inventory.GetCurrentWeaponData();
             if (currentWeaponData != null)
             {
-                entity.GetDamage(currentWeaponData.damage);
+                WeaponEffectManager effectManager = GetComponentInParent<WeaponEffectManager>();
+                WeaponItem modifiedWeaponData = currentWeaponData;
+                
+                if (effectManager != null)
+                {
+                    modifiedWeaponData = effectManager.GetModifiedWeaponStats(currentWeaponData);
+                }
+                
+                entity.GetDamage(modifiedWeaponData.damage);
+                
+                if (effectManager != null)
+                {
+                    effectManager.ApplyStatusEffectsToTarget(entity, modifiedWeaponData);
+                }
             }
             else
             {

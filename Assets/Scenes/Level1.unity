@@ -2459,6 +2459,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894930108}
   m_CullTransparentMesh: 1
+--- !u!1 &927687847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 927687848}
+  m_Layer: 0
+  m_Name: TransformWeaponReference
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &927687848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927687847}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.48833463, y: -0.5302391, z: 0.51983714, w: -0.45841587}
+  m_LocalPosition: {x: 0.6496711, y: 1.3882245, z: 0.08191281}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7330094607641221038}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &986876746
 GameObject:
   m_ObjectHideFlags: 0
@@ -56160,6 +56191,7 @@ GameObject:
   - component: {fileID: 6023843268914879627}
   - component: {fileID: 8439662856265247288}
   - component: {fileID: 8439662856265247289}
+  - component: {fileID: 8439662856265247290}
   m_Layer: 7
   m_Name: character_player
   m_TagString: Untagged
@@ -65095,6 +65127,7 @@ Transform:
   - {fileID: 8075014974358647911}
   - {fileID: 2848643254134548863}
   - {fileID: 6186978978221239524}
+  - {fileID: 927687848}
   - {fileID: 6040933750491134957}
   m_Father: {fileID: 5482352560840890370}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -73240,6 +73273,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.982829, z: 1}
   m_Center: {x: 0, y: 1.0000777, z: 0}
+--- !u!114 &8439662856265247290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6078589210164267086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3deb352e02278b944a051b6bddf0762c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableDecorators: []
+  autoRegisterDecorators: 1
 --- !u!4 &8441405991780728676
 Transform:
   m_ObjectHideFlags: 0

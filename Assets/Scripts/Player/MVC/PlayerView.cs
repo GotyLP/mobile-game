@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
+using System;
 
 
 public class PlayerView
@@ -18,10 +19,12 @@ public class PlayerView
     public float allowPlayerRotation = 0.1f;
 
     public float Speed;
+    
+    public event Action OnAttackTriggered = delegate { };
+    
     public PlayerView(Player user)
     {
         _animator = user.Animator;
-        //animator.GetBehaviours<BreathBehaviour>();
         var model = user.Model;
         if (model == null) 
         {
@@ -30,28 +33,61 @@ public class PlayerView
         }
         
         model.OnMovement += MovementAnimation;
-        Debug.Log("PlayerView: Suscrito al evento OnMovement");
     }
     
     private void MovementAnimation(float xValue, float zValue)
     {
-        Debug.Log($"MovementAnimation ejecutándose - X: {xValue:F2}, Z: {zValue:F2}");
         _animator.SetFloat("InputZ", zValue, VerticalAnimTime, Time.fixedDeltaTime);
         _animator.SetFloat("InputX", xValue, HorizontalAnimSmoothTime, Time.fixedDeltaTime);
 
-        //Calculate the Input Magnitude
         Speed = new Vector2(xValue, zValue).sqrMagnitude;
 
         if (Speed > allowPlayerRotation)
         {
-            Debug.Log($"Activando animación WALK - Speed: {Speed:F3}");
             _animator.SetFloat("InputMagnitude", Speed, StartAnimTime, Time.fixedDeltaTime);
         }
         else if (Speed < allowPlayerRotation)
         {
-            Debug.Log($"Activando animación IDLE - Speed: {Speed:F3}");
             _animator.SetFloat("InputMagnitude", Speed, StopAnimTime, Time.fixedDeltaTime);
         }
+    }
+    
+ 
+    public void TriggerAttackAnimation(string animationTrigger = "Attack01")
+    {
+        if (_animator != null)
+        {
+            _animator.SetTrigger(animationTrigger);
+            Debug.Log($"PlayerView: Triggered {animationTrigger} animation");
+                
+            OnAttackTriggered?.Invoke();
+        }
+        else
+        {
+            Debug.LogError("PlayerView: Animator is null, cannot trigger attack animation");
+        }
+    }
+    
+   
+    public bool IsAttacking()
+    {
+        if (_animator != null)
+        {
+            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(1); // Layer "Attack" es el index 1
+            return stateInfo.IsTag("Attack");
+        }
+        return false;
+    }
+    
+   
+    public float GetAttackProgress()
+    {
+        if (_animator != null && IsAttacking())
+        {
+            AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(1);
+            return stateInfo.normalizedTime;
+        }
+        return 0f;
     }
 }
 

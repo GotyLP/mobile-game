@@ -12,36 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f952a53c-8fcb-45ba-9b64-7c64f7368848\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"db09d947-bc08-4e29-91e1-bd7df4bac2a6\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"ActualLevel\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"a6e501f3-1d9c-495a-92f9-b42c77bb107c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"bccd46be-6387-4a32-a6d8-7145cf44a2da\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"ShouldShowPrototype\",\r\n      \"type\": \"bool\",\r\n      \"value\":
-    false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"3893920f-2f95-436a-bb9b-9ceab0c26a78\"\r\n   
+    false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2045f470-f88b-4a06-9360-edae4bd3c8ee\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"MenuText\",\r\n      \"type\": \"string\",\r\n     
     \"value\": \"Welcome stranger\"\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"c9a184c4-5b4e-4916-8716-586da3ba4af6\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"f247b87e-2848-43f0-bc30-e09e4954043f\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"PlayerScore\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0ee63d5e-78ae-4ea6-aba4-c378e5229e19\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"ca8830f8-705d-49d9-a73b-93cfc3d9acdf\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemyEnergy\",\r\n      \"type\": \"float\",\r\n      \"value\": 1.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"a2a6d644-c74e-43d6-b1f5-cb27cddbc398\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"67f50c0a-7d72-4d46-bdf3-fbc68a980eeb\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"GameDifficulty\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 10.0\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f952a53c-8fcb-45ba-9b64-7c64f7368848\"\r\n   
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"db09d947-bc08-4e29-91e1-bd7df4bac2a6\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"ActualLevel\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"a6e501f3-1d9c-495a-92f9-b42c77bb107c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"bccd46be-6387-4a32-a6d8-7145cf44a2da\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"ShouldShowPrototype\",\r\n      \"type\": \"bool\",\r\n      \"value\":
-    false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"3893920f-2f95-436a-bb9b-9ceab0c26a78\"\r\n   
+    false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2045f470-f88b-4a06-9360-edae4bd3c8ee\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"MenuText\",\r\n      \"type\": \"string\",\r\n     
     \"value\": \"Welcome stranger\"\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"c9a184c4-5b4e-4916-8716-586da3ba4af6\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"f247b87e-2848-43f0-bc30-e09e4954043f\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"PlayerScore\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0ee63d5e-78ae-4ea6-aba4-c378e5229e19\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"ca8830f8-705d-49d9-a73b-93cfc3d9acdf\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemyEnergy\",\r\n      \"type\": \"float\",\r\n      \"value\": 1.0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"a2a6d644-c74e-43d6-b1f5-cb27cddbc398\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"67f50c0a-7d72-4d46-bdf3-fbc68a980eeb\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"GameDifficulty\",\r\n      \"type\":
     \"float\",\r\n      \"value\": 10.0\r\n    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"5ab064cd-096c-4c45-9b07-810323c27414\",\r\n   

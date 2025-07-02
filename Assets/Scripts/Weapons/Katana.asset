@@ -16,3 +16,19 @@ MonoBehaviour:
   damage: 20
   attackCooldown: 0.5
   energyCost: 10
+  attackType: 0
+  animationTrigger: Attack01
+  attackEffects:
+  - slashEffect: {fileID: 6705249123243012403, guid: 98d384a28a8e0c743aa15bdf8766f36f, type: 3}
+    delay: 0.75
+    followPosition: 1
+    followRotation: 1
+    followDuration: 0.5
+    positionOffset: {x: 0, y: 0, z: 0.2}
+    rotationOffset: {x: 0, y: 0, z: 0}
+    effectDuration: 3
+    effectScale: {x: 0, y: 0, z: 0}
+    effectID: katana_slash
+  weaponTransformName: TransformWeaponReference
+  enableEffectCycling: 1
+  specificEffectID: 

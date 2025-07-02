@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     [field: SerializeField] public PlayerModel Model { get; private set; }
     private PlayerView _view;
+    public PlayerView View => _view;
     private PlayerController _controller;
     
 
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
         
         Model = new PlayerModel(this);
         _view = new PlayerView(this);
+        Model.SetView(_view);
         _controller = new PlayerController(this);
 
         EventManager.Subscribe(SimpleEventType.PlayerDeathEvent, DisableComponent);
