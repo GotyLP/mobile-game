@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        OpenMenu();
+        //OpenMenu();
     }
     
     public void ChangeSceneByIndex(int sceneIndex) // Cambiar escena por Build Settings usando carga asíncrona
@@ -86,12 +86,12 @@ public class PauseMenu : MonoBehaviour
         if (pauseMenu != null)
             pauseMenu.SetActive(false);        
     }
-    public void OpenMenu()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ToggleObject();
-        }
-    }
+    //public void OpenMenu()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        ToggleObject();
+    //    }
+    //}
 
 }
