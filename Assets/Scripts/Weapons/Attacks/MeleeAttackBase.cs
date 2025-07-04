@@ -1,39 +1,28 @@
 using UnityEngine;
 
-public class MeleeAttack : IAttackBehavior
+public abstract class MeleeAttackBase : IAttackBehavior
 {
-    public string AttackName => "Melee Attack";
+    public abstract string AttackName { get; }
     
-    private AttackEffectController _effectController;
+    protected AttackEffectController _effectController;
 
-    public void ExecuteAttack(WeaponItem weaponData, GameObject damageCollider, Transform attacker)
+    public abstract void ExecuteAttack(WeaponItem weaponData, GameObject damageCollider, Transform attacker);
+
+    public abstract void StopAttack(GameObject damageCollider);
+
+    public virtual void ApplyDamage(GameObject target, float damage, Transform attacker, WeaponItem weaponData)
     {
-        if (damageCollider != null)
+        if (target == null) return;
+
+        var entity = target.GetComponent<IEntity>();
+        if (entity != null)
         {
-            damageCollider.SetActive(true);
-            PlayAttackEffects(weaponData, attacker);
-        }
-        else
-        {
-            Debug.LogError("MeleeAttack: DamageCollider es NULL! No se puede activar el collider de daño.");
+            Debug.Log($"MeleeAttackBase: Aplicando {damage} de daño a {target.name}");
+            entity.GetDamage(damage);
         }
     }
 
-    public void StopAttack(GameObject damageCollider)
-    {
-        if (damageCollider != null)
-        {
-            damageCollider.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("MeleeAttack: DamageCollider es NULL! No se puede desactivar el collider de daño.");
-        }
-    }
-
-
-
-    private void PlayAttackEffects(WeaponItem weaponData, Transform attacker)
+    protected virtual void PlayAttackEffects(WeaponItem weaponData, Transform attacker)
     {
         if (_effectController == null)
         {
@@ -44,7 +33,7 @@ public class MeleeAttack : IAttackBehavior
             }
             else
             {
-                Debug.LogError("MeleeAttack: No se pudo obtener MonoBehaviour del atacante!");
+                Debug.LogError("MeleeAttackBase: No se pudo obtener MonoBehaviour del atacante!");
                 return;
             }
         }
@@ -63,13 +52,9 @@ public class MeleeAttack : IAttackBehavior
                 _effectController.ExecuteEffect(weaponData);
             }
         }
-        else
-        {
-            Debug.LogWarning($"MeleeAttack: No hay efectos configurados para {weaponData.weaponName}. attackEffects: {(weaponData.attackEffects != null ? $"Count={weaponData.attackEffects.Count}" : "NULL")}");
-        }
     }
 
-    private Transform FindWeaponTransform(Transform attacker, WeaponItem weaponData)
+    protected virtual Transform FindWeaponTransform(Transform attacker, WeaponItem weaponData)
     {
         Transform weaponTransform = null;
         
@@ -79,10 +64,6 @@ public class MeleeAttack : IAttackBehavior
             if (weaponTransform != null)
             {
                 return weaponTransform;
-            }
-            else
-            {
-                Debug.LogWarning($"MeleeAttack: No se encontró el transform '{weaponData.weaponTransformName}', usando búsqueda automática");
             }
         }
         
@@ -94,11 +75,6 @@ public class MeleeAttack : IAttackBehavior
         if (weaponTransform == null)
             weaponTransform = attacker.Find("mixamorig:RightHand");
             
-        if (weaponTransform == null)
-        {
-            weaponTransform = attacker;
-        }
-        
-        return weaponTransform;
+        return weaponTransform ?? attacker;
     }
 } 

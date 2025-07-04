@@ -31,6 +31,6 @@ public class SlashParameters
     public float effectDuration = 2f;
     [Tooltip("Escala del efecto")]
     public Vector3 effectScale = Vector3.one;
-    [Tooltip("ID único del efecto para usar con decorators")]
+    [Tooltip("ID único del efecto")]
     public string effectID = "default";
 } 

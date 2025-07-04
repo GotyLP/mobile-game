@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Bridge/Adapter between Unity's MonoBehaviour world and MVC Model
-/// Receives damage from scene interactions and delegates to PlayerModel
-/// </summary>
+
 public class LifeHandler : MonoBehaviour, IEntity
 {
     private Player _player;
@@ -15,7 +12,6 @@ public class LifeHandler : MonoBehaviour, IEntity
 
     void Start()
     {
-        // Verificar que no estamos en una escena de menú
         string currentSceneName = SceneManager.GetActiveScene().name;
         if (currentSceneName.Contains("Menu") || currentSceneName.Contains("MainMenu"))
         {
@@ -41,9 +37,6 @@ public class LifeHandler : MonoBehaviour, IEntity
         EventManager.Unsubscribe(SimpleEventType.PlayerDeathEvent, OnDead);
     }
 
-    /// <summary>
-    /// Called by external systems (bullets, enemies, etc.) via IEntity interface
-    /// </summary>
     public void GetDamage(float dmg)
     {
         if (_model != null)
