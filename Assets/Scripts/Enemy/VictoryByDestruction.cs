@@ -28,7 +28,7 @@ public class VictoryByDestruction : MonoBehaviour
 
     void ActualizarUI()
     {
-        contadorTexto.text = "Objetivos: " + objetivosDestruidos + " / " + objetivosNecesarios;
+        contadorTexto.text = + objetivosDestruidos + " / " + objetivosNecesarios;
     }
 
     void MostrarVictoria()

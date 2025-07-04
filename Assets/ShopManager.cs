@@ -42,7 +42,7 @@ public void Buy()
 
 void ActualizeUi()
 {
-    TextPoints.text = "Coins: " + CurrenciManager.Instance.GetPoints();
+    TextPoints.text = "" + CurrenciManager.Instance.GetPoints();
 }
 }
 
