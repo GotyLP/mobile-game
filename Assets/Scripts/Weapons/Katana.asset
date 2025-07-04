@@ -19,14 +19,14 @@ MonoBehaviour:
   attackType: 0
   animationTrigger: Attack01
   attackEffects:
-  - slashEffect: {fileID: 6705249123243012403, guid: 98d384a28a8e0c743aa15bdf8766f36f, type: 3}
+  - slashEffect: {fileID: 3784406283486823977, guid: 6cc64f50117f5df4a8df7f0b41e26513, type: 3}
     delay: 0.75
     followPosition: 1
     followRotation: 1
     followDuration: 0.5
-    positionOffset: {x: 0, y: 0, z: 0.2}
+    positionOffset: {x: 0, y: 0, z: 0}
     rotationOffset: {x: 0, y: 0, z: 0}
-    effectDuration: 3
+    effectDuration: 1
     effectScale: {x: 0, y: 0, z: 0}
     effectID: katana_slash
   weaponTransformName: TransformWeaponReference

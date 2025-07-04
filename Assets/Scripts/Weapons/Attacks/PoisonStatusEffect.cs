@@ -55,7 +55,6 @@ public class PoisonStatusEffect : MonoBehaviour
 
     private void ShowPoisonVisualEffect()
     {
-        Debug.Log($"POISON TICK: {poisonTickDamage} damage to {gameObject.name}");
     }
 
     public bool IsPoisoned()

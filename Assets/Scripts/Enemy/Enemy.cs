@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour, IEntity
 {
-    public VictoryByDestruction manager;// Referencia al script que maneja la victoria por destrucción
+    public VictoryByDestruction manager;// Referencia al script que maneja la victoria por destrucciï¿½n
     public int puntosAlMorir = 10;
     private float _life;
     [SerializeField] private float _maxLife = 100f;
@@ -21,7 +21,6 @@ public abstract class Enemy : MonoBehaviour, IEntity
 
     public void GetDamage(float damage)
     {
-        Debug.Log("AUCH " + damage + "vida: " + _life);
         _life -= damage;
         if (_life < 0)
         {
@@ -31,14 +30,12 @@ public abstract class Enemy : MonoBehaviour, IEntity
 
     public void OnDead()
     {
-        Debug.Log("objetivo destruidooooooooooooo ");
         if (manager != null)
         {
             manager.RegistrarDestruccion();
         }
         if (CurrenciManager.Instance != null)
         {
-            Debug.Log("RECOMPESA GANADA!!!: " + puntosAlMorir + " puntos al morir " + gameObject.name);
             CurrenciManager.Instance.AddPoints(puntosAlMorir);
         }
         gameObject.SetActive(false);        

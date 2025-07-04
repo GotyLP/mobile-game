@@ -18,6 +18,4 @@ public class SaveDataDto
     public  float maxLife;
     public  Vector3 playerPosition;
     public  string playerName = "player";
-
-    // Add other fields as necessary
 }

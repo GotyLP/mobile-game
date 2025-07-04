@@ -2214,7 +2214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &849396608
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -28155,7 +28155,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1762737639011940652, guid: 6cc64f50117f5df4a8df7f0b41e26513, type: 3}
       propertyPath: m_RenderAlignment
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3784406283486823977, guid: 6cc64f50117f5df4a8df7f0b41e26513, type: 3}
       propertyPath: m_Name
@@ -28203,10 +28203,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9059305694723767159, guid: 6cc64f50117f5df4a8df7f0b41e26513, type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9059305694723767159, guid: 6cc64f50117f5df4a8df7f0b41e26513, type: 3}
       propertyPath: InitialModule.rotation3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9059305694723767159, guid: 6cc64f50117f5df4a8df7f0b41e26513, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9059305694723767159, guid: 6cc64f50117f5df4a8df7f0b41e26513, type: 3}

@@ -12,8 +12,6 @@ public class AttackSystem
         _damageCollider = damageCollider;
         _attacker = attacker;
         
-        Debug.Log($"AttackSystem: Inicializando con DamageCollider: {damageCollider?.name ?? "NULL"} y Attacker: {attacker?.name ?? "NULL"}");
-        
         InitializeAttackBehaviors();
     }
 
@@ -24,8 +22,6 @@ public class AttackSystem
             { AttackType.Melee, new MeleeAttack() },
             { AttackType.Ranged, new RangedAttack() }
         };
-        
-        Debug.Log($"AttackSystem: Inicializados {_attackBehaviors.Count} tipos de ataque");
     }
 
     public void ExecuteAttack(WeaponItem weaponData)
@@ -35,8 +31,6 @@ public class AttackSystem
             Debug.LogWarning("AttackSystem: No hay datos de arma para ejecutar el ataque");
             return;
         }
-
-        Debug.Log($"AttackSystem: Ejecutando ataque de tipo {weaponData.attackType} con DamageCollider: {_damageCollider?.name ?? "NULL"}");
 
         if (_attackBehaviors.TryGetValue(weaponData.attackType, out IAttackBehavior attackBehavior))
         {
@@ -55,8 +49,6 @@ public class AttackSystem
             Debug.LogWarning("AttackSystem: No hay datos de arma para detener el ataque");
             return;
         }
-
-        Debug.Log($"AttackSystem: Deteniendo ataque de tipo {weaponData.attackType}");
 
         if (_attackBehaviors.TryGetValue(weaponData.attackType, out IAttackBehavior attackBehavior))
         {

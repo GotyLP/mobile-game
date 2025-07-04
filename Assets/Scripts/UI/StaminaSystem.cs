@@ -7,7 +7,6 @@ using Unity.VisualScripting;
 
 public class StaminaSystem : MonoBehaviour
 {
-    // Reloj
     DateTime _nextStaminaTime; 
     DateTime _lastStaminaTime;
 
@@ -95,7 +94,6 @@ public class StaminaSystem : MonoBehaviour
             }
             else
             {
-                Debug.Log("Stamina is recharging, please wait.");
             }
         }
         

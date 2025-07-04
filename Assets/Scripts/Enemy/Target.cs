@@ -6,7 +6,6 @@ public class Target : MonoBehaviour
 
     void OnDestroy()
     {
-        Debug.Log("objetivo destruidooooooooooooo " );
         if (manager != null)
         {
             manager.RegistrarDestruccion();

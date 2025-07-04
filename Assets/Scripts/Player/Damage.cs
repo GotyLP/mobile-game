@@ -42,7 +42,6 @@ public class Damage : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("No hay un arma equipada actualmente");
             }
         }
     }

@@ -19,7 +19,6 @@ public class AttackButton : MonoBehaviour
     {
         if (player != null)
         {
-            Debug.Log("EventTrigger: Iniciando ataque");
             player.StartAttack();
         }
     }
@@ -28,7 +27,6 @@ public class AttackButton : MonoBehaviour
     {
         if (player != null)
         {
-            Debug.Log("EventTrigger: Deteniendo ataque");
             player.StopAttack();
         }
     }
@@ -37,7 +35,6 @@ public class AttackButton : MonoBehaviour
     {
         if (player != null)
         {
-            Debug.Log("EventTrigger: Ataque simple");
             player.PerformAttack();
         }
     }

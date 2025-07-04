@@ -30,13 +30,11 @@ public void Buy()
     {
             audioSource.clip = sound1;
             audioSource.Play();
-            Debug.Log("Compra realizada con éxito.");
     }
     else
     {
             audioSource.clip = sound2;
             audioSource.Play();
-            Debug.Log("No tienes suficientes puntos ");
     }
 
     ActualizeUi();

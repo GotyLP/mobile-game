@@ -15,7 +15,6 @@ public class VictoryByDestruction : MonoBehaviour
         victoryPanel.SetActive(false);
     }
 
-    // Llama este método desde los objetivos cuando sean destruidos
     public void RegistrarDestruccion()
     {
         objetivosDestruidos++;
@@ -35,6 +34,5 @@ public class VictoryByDestruction : MonoBehaviour
     void MostrarVictoria()
     {
         victoryPanel.SetActive(true);
-        Debug.Log("¡Victoria! Todos los objetivos fueron destruidos.");
     }
 }

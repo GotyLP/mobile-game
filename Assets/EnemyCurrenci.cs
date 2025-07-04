@@ -10,7 +10,6 @@ public class EnemyCurrenci : MonoBehaviour
     {
         if (CurrenciManager.Instance != null)
         {
-            Debug.Log("RECOMPESA GANADA!!!: " + puntosAlMorir + " puntos al morir " + gameObject.name);
             CurrenciManager.Instance.AddPoints(puntosAlMorir);
         }
     }

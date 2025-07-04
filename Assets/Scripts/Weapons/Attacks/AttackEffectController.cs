@@ -44,15 +44,11 @@ public class AttackEffectController
 
     public void ExecuteEffect(WeaponItem weaponData)
     {
-        Debug.Log($"AttackEffectController: ExecuteEffect llamado para arma: {weaponData?.weaponName ?? "NULL"}");
-        
         if (_currentSlash == null)
         {
             Debug.LogWarning("AttackEffectController: No hay efecto seleccionado");
             return;
         }
-        
-        Debug.Log($"AttackEffectController: Efecto actual: {_currentSlash.effectID}, Prefab: {(_currentSlash.slashEffect != null ? _currentSlash.slashEffect.name : "NULL")}");
 
         if (_coroutineRunner != null)
         {
@@ -87,15 +83,11 @@ public class AttackEffectController
 
     private IEnumerator ExecuteSlashCoroutine(SlashParameters slashParams, WeaponItem weaponData)
     {
-        Debug.Log($"AttackEffectController: Iniciando corrutina de efecto con delay: {slashParams.delay}");
-        
         SlashParameters modifiedParams = ApplyDecorators(slashParams, weaponData);
         
         ExecutePreEffects(weaponData);
         
         yield return new WaitForSeconds(modifiedParams.delay);
-        
-        Debug.Log($"AttackEffectController: Después del delay. WeaponTransform: {(weaponTransform != null ? weaponTransform.name : "NULL")}, SlashEffect: {(modifiedParams.slashEffect != null ? modifiedParams.slashEffect.name : "NULL")}");
         
         if (weaponTransform == null)
         {
@@ -112,15 +104,10 @@ public class AttackEffectController
         Vector3 spawnPosition = weaponTransform.position + weaponTransform.TransformDirection(modifiedParams.positionOffset);
         Quaternion spawnRotation = weaponTransform.rotation * Quaternion.Euler(modifiedParams.rotationOffset);
         
-        Debug.Log($"AttackEffectController: Instanciando efecto en posición: {spawnPosition}, rotación: {spawnRotation}");
-        
         GameObject vfx = Object.Instantiate(modifiedParams.slashEffect, spawnPosition, spawnRotation);
         
         if (vfx != null)
         {
-            Debug.Log($"AttackEffectController: ¡Efecto instanciado exitosamente! GameObject: {vfx.name}");
-            
-            // Verificar y ajustar configuración del sistema de partículas
             VerifyAndFixParticleSystem(vfx);
             
             vfx.transform.localScale = modifiedParams.effectScale;
@@ -236,16 +223,12 @@ public class AttackEffectController
         if (!_decorators.Contains(decorator))
         {
             _decorators.Add(decorator);
-            Debug.Log($"AttackEffectController: Registrado decorator: {decorator.DecoratorName}");
         }
     }
 
     public void UnregisterDecorator(IAttackEffectDecorator decorator)
     {
-        if (_decorators.Remove(decorator))
-        {
-            Debug.Log($"AttackEffectController: Removido decorator: {decorator.DecoratorName}");
-        }
+        _decorators.Remove(decorator);
     }
 
 
@@ -262,7 +245,5 @@ public class AttackEffectController
 
     private void VerifyAndFixParticleSystem(GameObject vfx)
     {
-        // Implementa la lógica para verificar y ajustar la configuración del sistema de partículas
-        // Esto puede incluir la verificación de la velocidad de reproducción, la duración de la reproducción, etc.
     }
 } 

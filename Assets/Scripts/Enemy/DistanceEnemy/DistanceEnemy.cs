@@ -22,17 +22,14 @@ public class DistanceEnemy : Enemy, IProduct
 
     public void Initialize()
     {
-        //Debug.Log("Enemy Initialized");
     }
 
     private void Awake()
     {
-        // Aplicar multiplicadores de dificultad
         float difficultyMultiplier = RemoteConfig.Instance != null ? RemoteConfig.Instance.GameDifficulty : 1f;
         _currentMaxVelocity = _stats.maxVelocity * difficultyMultiplier;
-        _currentShootCooldown = _stats.shootCooldown / difficultyMultiplier; // Menor cooldown = más rápido dispara
+        _currentShootCooldown = _stats.shootCooldown / difficultyMultiplier;
 
-        // Usar la energía desde Remote Config si está disponible
         float baseEnergy = RemoteConfig.Instance != null ? RemoteConfig.Instance.EnemyEnergy : _stats.maxEnergy;
         _energy = baseEnergy;
 

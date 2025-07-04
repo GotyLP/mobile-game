@@ -41,8 +41,6 @@ public class WeaponEffectManager : MonoBehaviour
     private void RegisterAvailableDecorators()
     {
         RegisterDecorator("poison", new PoisonEffectDecorator());
-        
-        Debug.Log($"WeaponEffectManager: Registrados {_registeredDecorators.Count} decorators");
     }
 
    
@@ -54,7 +52,6 @@ public class WeaponEffectManager : MonoBehaviour
         }
         
         _registeredDecorators[id] = decorator;
-        Debug.Log($"WeaponEffectManager: Registrado decorator '{decorator.DecoratorName}' con ID '{id}'");
     }
 
     
@@ -69,7 +66,6 @@ public class WeaponEffectManager : MonoBehaviour
         if (_registeredDecorators.TryGetValue(decoratorID, out IAttackEffectDecorator decorator))
         {
             _effectController.RegisterDecorator(decorator);
-            Debug.Log($"WeaponEffectManager: Aplicado decorator '{decorator.DecoratorName}'");
         }
         else
         {
@@ -85,7 +81,6 @@ public class WeaponEffectManager : MonoBehaviour
         if (_registeredDecorators.TryGetValue(decoratorID, out IAttackEffectDecorator decorator))
         {
             _effectController.UnregisterDecorator(decorator);
-            Debug.Log($"WeaponEffectManager: Removido decorator '{decorator.DecoratorName}'");
         }
     }
 
@@ -95,7 +90,6 @@ public class WeaponEffectManager : MonoBehaviour
         if (_effectController != null)
         {
             _effectController.ClearDecorators();
-            Debug.Log("WeaponEffectManager: Limpiados todos los decorators");
         }
     }
 

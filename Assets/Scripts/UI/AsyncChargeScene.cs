@@ -44,11 +44,10 @@ public class AsyncChargeScene : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough stamina to continue");           
         }
 
 
     }
-    public void LoadLevel(bool value)=>_myScene.allowSceneActivation = value; // Permite activar la escena una vez que se ha cargado completamente
+    public void LoadLevel(bool value)=>_myScene.allowSceneActivation = value;
 
 }

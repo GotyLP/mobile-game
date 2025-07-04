@@ -8,16 +8,9 @@ public class MeleeAttack : IAttackBehavior
 
     public void ExecuteAttack(WeaponItem weaponData, GameObject damageCollider, Transform attacker)
     {
-        Debug.Log($"MeleeAttack: Ejecutando ataque con collider: {damageCollider?.name ?? "NULL"}");
-        
         if (damageCollider != null)
         {
-            Debug.Log($"MeleeAttack: Activando DamageCollider - Estado anterior: {damageCollider.activeInHierarchy}");
             damageCollider.SetActive(true);
-            Debug.Log($"MeleeAttack: DamageCollider activado - Estado actual: {damageCollider.activeInHierarchy}");
-            
-            Debug.Log($"¡Ataque cuerpo a cuerpo de {weaponData.weaponName}! Daño: {weaponData.damage}");
-                
             PlayAttackEffects(weaponData, attacker);
         }
         else
@@ -30,9 +23,7 @@ public class MeleeAttack : IAttackBehavior
     {
         if (damageCollider != null)
         {
-            Debug.Log($"MeleeAttack: Desactivando DamageCollider - Estado anterior: {damageCollider.activeInHierarchy}");
             damageCollider.SetActive(false);
-            Debug.Log($"MeleeAttack: DamageCollider desactivado - Estado actual: {damageCollider.activeInHierarchy}");
         }
         else
         {
@@ -44,15 +35,12 @@ public class MeleeAttack : IAttackBehavior
 
     private void PlayAttackEffects(WeaponItem weaponData, Transform attacker)
     {
-        Debug.Log($"MeleeAttack: PlayAttackEffects iniciado para arma: {weaponData.weaponName}");
-        
         if (_effectController == null)
         {
             MonoBehaviour coroutineRunner = attacker.GetComponent<MonoBehaviour>();
             if (coroutineRunner != null)
             {
                 _effectController = new AttackEffectController(coroutineRunner);
-                Debug.Log("MeleeAttack: AttackEffectController creado exitosamente");
             }
             else
             {
@@ -63,22 +51,15 @@ public class MeleeAttack : IAttackBehavior
 
         if (weaponData.attackEffects != null && weaponData.attackEffects.Count > 0)
         {
-            Debug.Log($"MeleeAttack: Encontrados {weaponData.attackEffects.Count} efectos configurados");
-            
             Transform weaponTransform = FindWeaponTransform(attacker, weaponData);
-            Debug.Log($"MeleeAttack: WeaponTransform encontrado: {(weaponTransform != null ? weaponTransform.name : "NULL")}");
-            
             _effectController.Initialize(weaponData.attackEffects, weaponTransform, attacker);
-            Debug.Log("MeleeAttack: AttackEffectController inicializado");
            
             if (!string.IsNullOrEmpty(weaponData.specificEffectID))
             {
-                Debug.Log($"MeleeAttack: Ejecutando efecto específico: {weaponData.specificEffectID}");
                 _effectController.ExecuteEffectByID(weaponData.specificEffectID, weaponData);
             }
             else
             {
-                Debug.Log("MeleeAttack: Ejecutando efecto por defecto");
                 _effectController.ExecuteEffect(weaponData);
             }
         }
@@ -97,7 +78,6 @@ public class MeleeAttack : IAttackBehavior
             weaponTransform = attacker.Find(weaponData.weaponTransformName);
             if (weaponTransform != null)
             {
-                Debug.Log($"MeleeAttack: Usando transform específico configurado: {weaponData.weaponTransformName}");
                 return weaponTransform;
             }
             else
@@ -116,7 +96,6 @@ public class MeleeAttack : IAttackBehavior
             
         if (weaponTransform == null)
         {
-            Debug.Log("MeleeAttack: No se encontró transform específico de arma, usando transform del atacante");
             weaponTransform = attacker;
         }
         

@@ -22,13 +22,11 @@ public class IdleState : IState
 
     public void OnEnter()
     {
-        Debug.Log("OnEnter IdleState");
         _setVelocity?.Invoke(Vector3.zero);
     }
 
     public void OnUpdate()
     {
-        Debug.Log("OnUpdate IdleState");
         float currentEnergy = _getEnergy();
         currentEnergy += _regenSpeed * Time.deltaTime;
 
@@ -42,6 +40,5 @@ public class IdleState : IState
 
     public void OnExit()
     {
-        Debug.Log("OnExit IdleState");
     }
 }

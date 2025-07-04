@@ -38,7 +38,6 @@ public class MovementState : IState
 
     public void OnEnter()
     {
-        Debug.Log("OnEnter MovementState");
     }
 
     public void OnUpdate()
@@ -73,7 +72,6 @@ public class MovementState : IState
 
     public void OnExit()
     {
-        Debug.Log("OnExit MovementState");
     }
 
 }
