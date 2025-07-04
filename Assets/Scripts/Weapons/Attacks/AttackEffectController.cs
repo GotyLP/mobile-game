@@ -10,7 +10,6 @@ public class AttackEffectController
     public Transform attackerTransform;
     public bool cycleAttacks = true;
     
-    private List<IAttackEffectDecorator> _decorators = new List<IAttackEffectDecorator>();
     private SlashParameters _currentSlash;
     private int _currentAttackIndex = 0;
     private MonoBehaviour _coroutineRunner;
@@ -83,11 +82,7 @@ public class AttackEffectController
 
     private IEnumerator ExecuteSlashCoroutine(SlashParameters slashParams, WeaponItem weaponData)
     {
-        SlashParameters modifiedParams = ApplyDecorators(slashParams, weaponData);
-        
-        ExecutePreEffects(weaponData);
-        
-        yield return new WaitForSeconds(modifiedParams.delay);
+        yield return new WaitForSeconds(slashParams.delay);
         
         if (weaponTransform == null)
         {
@@ -95,38 +90,36 @@ public class AttackEffectController
             yield break;
         }
         
-        if (modifiedParams.slashEffect == null)
+        if (slashParams.slashEffect == null)
         {
             Debug.LogError("AttackEffectController: ¡SlashEffect prefab es NULL!");
             yield break;
         }
 
-        Vector3 spawnPosition = weaponTransform.position + weaponTransform.TransformDirection(modifiedParams.positionOffset);
-        Quaternion spawnRotation = weaponTransform.rotation * Quaternion.Euler(modifiedParams.rotationOffset);
+        Vector3 spawnPosition = weaponTransform.position + weaponTransform.TransformDirection(slashParams.positionOffset);
+        Quaternion spawnRotation = weaponTransform.rotation * Quaternion.Euler(slashParams.rotationOffset);
         
-        GameObject vfx = Object.Instantiate(modifiedParams.slashEffect, spawnPosition, spawnRotation);
+        GameObject vfx = Object.Instantiate(slashParams.slashEffect, spawnPosition, spawnRotation);
         
         if (vfx != null)
         {
             VerifyAndFixParticleSystem(vfx);
             
-            vfx.transform.localScale = modifiedParams.effectScale;
+            vfx.transform.localScale = slashParams.effectScale;
             
-            float followTime = modifiedParams.followDuration > 0 ? modifiedParams.followDuration : modifiedParams.effectDuration;
+            float followTime = slashParams.followDuration > 0 ? slashParams.followDuration : slashParams.effectDuration;
             
-            if (modifiedParams.followPosition || modifiedParams.followRotation)
+            if (slashParams.followPosition || slashParams.followRotation)
             {
-                _coroutineRunner.StartCoroutine(FollowWeapon(vfx, modifiedParams, followTime));
+                _coroutineRunner.StartCoroutine(FollowWeapon(vfx, slashParams, followTime));
             }
             
-            Object.Destroy(vfx, modifiedParams.effectDuration);
+            Object.Destroy(vfx, slashParams.effectDuration);
         }
         else
         {
             Debug.LogError("AttackEffectController: ¡Fallo al instanciar el efecto!");
         }
-        
-        ExecutePostEffects(weaponData);
     }
 
     private IEnumerator FollowWeapon(GameObject vfx, SlashParameters slashParams, float duration)
@@ -150,58 +143,6 @@ public class AttackEffectController
         }
     }
 
-    private SlashParameters ApplyDecorators(SlashParameters originalParams, WeaponItem weaponData)
-    {
-        SlashParameters modifiedParams = originalParams;
-        
-        var sortedDecorators = _decorators.OrderByDescending(d => d.Priority).ToList();
-        
-        foreach (var decorator in sortedDecorators)
-        {
-            modifiedParams = decorator.ModifyParameters(modifiedParams, weaponData);
-        }
-        
-        return modifiedParams;
-    }
-
-    public WeaponItem GetModifiedWeaponStats(WeaponItem originalWeapon)
-    {
-        WeaponItem modifiedWeapon = originalWeapon;
-        
-        var sortedDecorators = _decorators.OrderByDescending(d => d.Priority).ToList();
-        
-        foreach (var decorator in sortedDecorators)
-        {
-            modifiedWeapon = decorator.ModifyWeaponStats(modifiedWeapon);
-        }
-        
-        return modifiedWeapon;
-    }
-
-    public void ApplyStatusEffectsToTarget(IEntity target, WeaponItem weaponData)
-    {
-        foreach (var decorator in _decorators)
-        {
-            decorator.ApplyStatusEffect(target, weaponData);
-        }
-    }
-
-    private void ExecutePreEffects(WeaponItem weaponData)
-    {
-        foreach (var decorator in _decorators)
-        {
-            decorator.OnPreEffect(attackerTransform, weaponData);
-        }
-    }
-
-    private void ExecutePostEffects(WeaponItem weaponData)
-    {
-        foreach (var decorator in _decorators)
-        {
-            decorator.OnPostEffect(attackerTransform, weaponData);
-        }
-    }
-
     public void SelectEffect(int index)
     {
         if (slashEffects.Count == 0) return;
@@ -215,32 +156,6 @@ public class AttackEffectController
     {
         int nextAttack = (_currentAttackIndex + 1) % slashEffects.Count;
         SelectEffect(nextAttack);
-    }
-
-
-    public void RegisterDecorator(IAttackEffectDecorator decorator)
-    {
-        if (!_decorators.Contains(decorator))
-        {
-            _decorators.Add(decorator);
-        }
-    }
-
-    public void UnregisterDecorator(IAttackEffectDecorator decorator)
-    {
-        _decorators.Remove(decorator);
-    }
-
-
-    public List<IAttackEffectDecorator> GetDecorators()
-    {
-        return new List<IAttackEffectDecorator>(_decorators);
-    }
-
-
-    public void ClearDecorators()
-    {
-        _decorators.Clear();
     }
 
     private void VerifyAndFixParticleSystem(GameObject vfx)
