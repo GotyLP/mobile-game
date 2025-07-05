@@ -47,8 +47,7 @@ public class LifeHandler : MonoBehaviour, IEntity
     }
 
     public void OnDead()
-    {      
-
+    {   
         Time.timeScale = 0; // Pause the game
         Debug.Log("Player Dead - Game Paused");        
     }

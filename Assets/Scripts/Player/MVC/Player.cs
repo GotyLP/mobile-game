@@ -5,14 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Inventory))]
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Weapon))]
 public class Player : MonoBehaviour
 {
     [field: SerializeField] public PlayerModel Model { get; private set; }
     private PlayerView _view;
     public PlayerView View => _view;
     private PlayerController _controller;
-    
 
+    public Weapon Weapon { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
     public Inventory Inventory { get; private set; }
@@ -32,7 +33,8 @@ public class Player : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();    
         Animator = GetComponent<Animator>();
         Inventory = GetComponent<Inventory>();
-        
+        Weapon = GetComponent<Weapon>();
+
         if (DamageCollider == null)
         {
             Debug.LogError("Player: ¡DamageCollider no está asignado en el Inspector! El sistema de ataque no funcionará correctamente.");

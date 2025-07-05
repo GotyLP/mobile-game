@@ -13,9 +13,10 @@ public class PauseMenu : MonoBehaviour
     public GameObject loadingPanel; // Panel de carga opcional
     // public GameObject pausePanel;
 
-    private void OnEnable()
+    private void Start()
     {
         EventManager.Subscribe(SimpleEventType.PlayerDeathEvent, OnPlayerDeath);
+        Debug.Log("PauseMenu: Subscribed to PlayerDeathEvent");
     }
 
     private void OnDisable()
@@ -26,6 +27,7 @@ public class PauseMenu : MonoBehaviour
     private void OnPlayerDeath()
     {
         ActivateObject();
+        Debug.Log("Player is dead");
     }
 
     private void Update()

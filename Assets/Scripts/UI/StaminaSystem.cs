@@ -26,7 +26,7 @@ public class StaminaSystem : MonoBehaviour
         if(_currentStamina < _maxStamina)
         {
             notifTimer = _nextStaminaTime - DateTime.Now;
-            DisplayNotif();
+            //DisplayNotif();
         }
         
     }
@@ -72,7 +72,7 @@ public class StaminaSystem : MonoBehaviour
             yield return new WaitForEndOfFrame();
 
         }
-        MobileNotificationManager.Instance.CancelNotification(_id);
+       // MobileNotificationManager.Instance.CancelNotification(_id);
         _recharging = false;
     }
     DateTime AddDuration(DateTime timeToAdd, float duration) => timeToAdd.AddSeconds(duration);
@@ -84,8 +84,8 @@ public class StaminaSystem : MonoBehaviour
         {
             _currentStamina -= quantityOfUsage;
             UpdateStamina();
-           MobileNotificationManager.Instance.CancelNotification(_id);
-            DisplayNotif();
+           //MobileNotificationManager.Instance.CancelNotification(_id);
+           // DisplayNotif();
 
             if (!_recharging)
             {
@@ -98,13 +98,13 @@ public class StaminaSystem : MonoBehaviour
         }
         
     }
-    public void DisplayNotif()
-    {
-        _id = MobileNotificationManager.Instance.DisplayNotification("Stamina Recharged!", "Your stamina has been recharged, come back and play!",
-           IconSelecter.icon_0, IconSelecter.icon_1, AddDuration(DateTime.Now, ((_maxStamina - (_currentStamina) + 1 * _timeToRecharge) + 1 
-           +(float) notifTimer.TotalSeconds)));
+    //public void DisplayNotif()
+    //{
+    //    _id = MobileNotificationManager.Instance.DisplayNotification("Stamina Recharged!", "Your stamina has been recharged, come back and play!",
+    //       IconSelecter.icon_0, IconSelecter.icon_1, AddDuration(DateTime.Now, ((_maxStamina - (_currentStamina) + 1 * _timeToRecharge) + 1 
+    //       +(float) notifTimer.TotalSeconds)));
         
-    }
+    //}
 
     void UpdateTimer()
     {

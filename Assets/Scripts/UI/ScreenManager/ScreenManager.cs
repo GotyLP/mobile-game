@@ -9,6 +9,7 @@ public class ScreenManager : MonoBehaviour
 
     private Stack<IScreen> _screensStack;
     
+
     private void Awake()
     {
         Instance = this;

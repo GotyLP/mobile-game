@@ -33,6 +33,7 @@ public abstract class Enemy : MonoBehaviour, IEntity
         if (manager != null)
         {
             manager.RegistrarDestruccion();
+            Debug.Log("Enemy destroyed, points awarded: " + puntosAlMorir);
         }
         if (CurrenciManager.Instance != null)
         {

@@ -8,7 +8,14 @@ public class ClientDebugger : MonoBehaviour
    
 
     [SerializeField] private SimpleUiScreen _pauseScreen;
-
+    private void Start()
+    {
+        EventManager.Subscribe(SimpleEventType.PlayerDeathEvent, Pause);
+    }
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe(SimpleEventType.PlayerDeathEvent, Pause);
+    }
     private void Update()
     {
         
